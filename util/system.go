@@ -4,20 +4,16 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"strings"
 )
 
 // 运行系统命令
 func SystemCall(dir string, params ...string) {
-	var build strings.Builder
-	build.WriteString(">")
-	build.WriteString(" ")
-	build.WriteString(dir)
+	logStr := ">"
+	logStr += " " + dir
 	for _, val := range params {
-		build.WriteString(" ")
-		build.WriteString(val)
+		logStr += " " + val
 	}
-	log.Println(build.String())
+	log.Println(logStr)
 	cmd := exec.Command("PowerShell", params...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

@@ -50,6 +50,7 @@ func handleHistory(ctx *gin.Context) {
 	handleIndex(ctx)
 }
 
+// 主程序
 func main() {
 	initFile()
 	router := gin.Default()
@@ -59,6 +60,8 @@ func main() {
 	api.UseApiRouter(router)
 	// 无路由匹配时，加载history模式中间件
 	router.NoRoute(handleHistory)
+	// 在浏览器中启动UI
 	util.BrowserOpen("http://localhost")
+	// 启动后端
 	router.Run("localhost:80")
 }
