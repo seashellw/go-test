@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// 运行系统命令
 func SystemCall(dir string, params ...string) {
 	var build strings.Builder
 	build.WriteString(">")
@@ -24,6 +25,7 @@ func SystemCall(dir string, params ...string) {
 	cmd.Run()
 }
 
+// 在浏览器中打开链接
 func BrowserOpen(url string) {
 	SystemCall("./", "explorer", url)
 }
