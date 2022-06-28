@@ -6,7 +6,12 @@ import { createPinia } from "pinia";
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: "/", component: () => import("./components/Home.vue") }],
+  routes: [
+    {
+      path: "/",
+      component: () => import("./components/Home.vue"),
+    },
+  ],
 });
 
 const app = createApp(App);
