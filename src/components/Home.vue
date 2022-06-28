@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ElButton } from "element-plus";
 import { useAppStore } from "../store/app";
+import { Button } from "tdesign-vue-next";
 const appStore = useAppStore();
 </script>
 <template>
   <div>{{ appStore.count }}</div>
-  <el-button @click="appStore.add">I am ElButton</el-button>
+  <Button class="m-4" @click="appStore.add">I am ElButton</Button>
 </template>

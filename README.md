@@ -5,13 +5,14 @@
 ## 构建
 
 ```shell
-go run .\commands\build.go
+pnpm install
+pnpm build
 
 ```
 
 ## 启动
 
 ```shell
-./go-test.exe
+./dist/go.exe
 
 ```

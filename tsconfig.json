@@ -12,7 +12,6 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "types": ["element-plus/global"]
   },
   "include": [
     "vite.config.ts",
