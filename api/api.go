@@ -1,18 +1,13 @@
 package api
 
 import (
-	"net/http"
+	"go-test/api/fetch"
 
 	"github.com/gin-gonic/gin"
 )
 
 // 使用api路由
-func UseApiRouter(engine *gin.Engine) {
-	api := engine.Group("/api")
-
-	api.POST("/ping", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"ok": true,
-		})
-	})
+func Route(engine *gin.Engine) {
+	apiGroup := engine.Group("/api")
+	fetch.Use(apiGroup)
 }

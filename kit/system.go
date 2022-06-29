@@ -1,7 +1,6 @@
-package util
+package kit
 
 import (
-	"log"
 	"os"
 	"os/exec"
 )
@@ -9,12 +8,7 @@ import (
 type System struct{}
 
 func (sys System) getCmd(dir string, params ...string) *exec.Cmd {
-	logStr := ">"
-	logStr += " " + dir
-	for _, val := range params {
-		logStr += " " + val
-	}
-	log.Println(logStr)
+	LogBlue(append([]string{">", dir}, params...)...)
 	cmd := exec.Command("PowerShell", params...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

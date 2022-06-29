@@ -4,7 +4,7 @@ import (
 	"embed"
 	"flag"
 	"go-test/api"
-	"go-test/util"
+	"go-test/kit"
 	"io/fs"
 	"net/http"
 	"strings"
@@ -12,31 +12,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 初始化启动参数
-func initFlag() string {
-	url := flag.String("u", "http://localhost", "启动URL")
-	flag.Parse()
-	return *url
-}
+// 启动参数中的url
+var url = flag.String("u", "http://localhost", "启动URL")
 
 //go:embed dist
 var clientFs embed.FS
 
-var httpFs http.FileSystem
+// 文件系统服务
 var fileServer http.Handler
 
-// 初始化静态资源文件系统
-func initFile() {
+// 初始化
+func init() {
+	flag.Parse()
 	distFs, _ := fs.Sub(clientFs, "dist")
-	httpFs = http.FS(distFs)
-	fileServer = http.FileServer(httpFs)
-}
-
-// 发送index
-func handleIndex(ctx *gin.Context) {
-	req, _ := http.NewRequest("GET", "/", nil)
-	fileServer.ServeHTTP(ctx.Writer, req)
-	ctx.Abort()
+	fileServer = http.FileServer(http.FS(distFs))
 }
 
 // 静态资源中间件
@@ -55,22 +44,24 @@ func handleHistory(ctx *gin.Context) {
 	if ctx.Request.Method != "GET" || strings.HasPrefix(ctx.Request.URL.Path, "/api/") {
 		return
 	}
-	handleIndex(ctx)
+	req, _ := http.NewRequest("GET", "/", nil)
+	fileServer.ServeHTTP(ctx.Writer, req)
+	ctx.Abort()
 }
 
 // 主程序
 func main() {
-	url := initFlag()
-	initFile()
 	router := gin.Default()
 	// 静态资源中间件
 	router.Use(handleStatic)
 	// 加载api路由
-	api.UseApiRouter(router)
+	api.Route(router)
 	// 无路由匹配时，加载history模式中间件
 	router.NoRoute(handleHistory)
 	// 在浏览器中启动UI
-	util.BrowserOpen(url)
+	if *url != "f" {
+		kit.BrowserOpen(*url)
+	}
 	// 启动后端
 	router.Run("localhost:80")
 }

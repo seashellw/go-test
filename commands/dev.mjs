@@ -1,4 +1,4 @@
 import { $ } from "zx";
 
 $`vite`;
-$`go run . -u http://localhost:3000`;
+$`pnpm dev:server`;
