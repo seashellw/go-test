@@ -35,7 +35,6 @@ func handleStatic(ctx *gin.Context) {
 	if err == nil || path == "/" {
 		gin.WrapH(fileServer)(ctx)
 		ctx.Abort()
-		return
 	}
 }
 
@@ -49,8 +48,19 @@ func handleHistory(ctx *gin.Context) {
 	ctx.Abort()
 }
 
+// 在浏览器中打开url，若url不正确，则不打开
+func handleOpenBrowser() {
+	url := *url
+	if !strings.HasPrefix(url, "http") {
+		kit.LogBlue("The url used for the browser is incorrect. No browser open.")
+		return
+	}
+	kit.BrowserOpen(url)
+}
+
 // 主程序
 func main() {
+	test()
 	router := gin.Default()
 	// 静态资源中间件
 	router.Use(handleStatic)
@@ -59,9 +69,10 @@ func main() {
 	// 无路由匹配时，加载history模式中间件
 	router.NoRoute(handleHistory)
 	// 在浏览器中启动UI
-	if *url != "f" {
-		kit.BrowserOpen(*url)
-	}
+	handleOpenBrowser()
 	// 启动后端
 	router.Run("localhost:80")
+}
+
+func test() {
 }

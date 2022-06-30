@@ -4,3 +4,4 @@ import { Button } from "tdesign-vue-next";
 <template>
   <Button> config </Button>
 </template>
+<style scoped></style>

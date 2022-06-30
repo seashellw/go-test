@@ -10,3 +10,5 @@ dist
 
 pnpm-lock.yaml
 *.exe
+
+go-config.json

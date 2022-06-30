@@ -25,6 +25,7 @@ type response struct {
 	Data string
 	// 响应Cookie
 	Cookie map[string]string
+	Header map[string]string
 }
 
 func Use(router *gin.RouterGroup) {
@@ -38,7 +39,7 @@ func Use(router *gin.RouterGroup) {
 		if req.Method == "GET" {
 			newReq, _ := http.NewRequest(req.Method, req.Url, nil)
 			for key, value := range req.Header {
-				newReq.Header.Add(key, value)
+				newReq.Header.Set(key, value)
 			}
 			for key, value := range req.Cookie {
 				newReq.AddCookie(&http.Cookie{
@@ -58,6 +59,10 @@ func Use(router *gin.RouterGroup) {
 			res.Cookie = map[string]string{}
 			for _, cookie := range newRes.Cookies() {
 				res.Cookie[cookie.Name] = cookie.Value
+			}
+			res.Header = map[string]string{}
+			for key := range newReq.Header {
+				res.Header[key] = newReq.Header.Get(key)
 			}
 			ctx.JSON(http.StatusOK, res)
 			return
@@ -65,9 +70,9 @@ func Use(router *gin.RouterGroup) {
 
 		if req.Method == "POST" {
 			newReq, _ := http.NewRequest(req.Method, req.Url, strings.NewReader(req.Data))
-			newReq.Header.Add("Content-Type", "application/json;charset=UTF-8")
+			newReq.Header.Set("Content-Type", "application/json;charset=UTF-8")
 			for key, value := range req.Header {
-				newReq.Header.Add(key, value)
+				newReq.Header.Set(key, value)
 			}
 			for key, value := range req.Cookie {
 				newReq.AddCookie(&http.Cookie{
@@ -87,6 +92,10 @@ func Use(router *gin.RouterGroup) {
 			res.Cookie = map[string]string{}
 			for _, cookie := range newRes.Cookies() {
 				res.Cookie[cookie.Name] = cookie.Value
+			}
+			res.Header = map[string]string{}
+			for key := range newReq.Header {
+				res.Header[key] = newReq.Header.Get(key)
 			}
 			ctx.JSON(http.StatusOK, res)
 			return

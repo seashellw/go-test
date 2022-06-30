@@ -1,17 +1,28 @@
+@import url("tdesign-vue-next/es/style/index.css");
+
 html,
 body,
-ul,
-ol,
-li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
-button {
+a,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+label {
   margin: 0;
   padding: 0;
 }
 
-ul,
 ol,
-li {
+ul {
   list-style: none;
 }
 
@@ -19,4 +30,3 @@ li {
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
-

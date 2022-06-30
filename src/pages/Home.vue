@@ -1,8 +1,10 @@
-<script setup lang="ts">
-import { Button } from "tdesign-vue-next";
-</script>
+<script setup lang="ts"></script>
 <template>
-  <Button>I am ElButton</Button>
+  <h1>首页</h1>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  margin: 1rem;
+}
+</style>

@@ -8,9 +8,10 @@ import (
 
 func HandleError(err error, ctx *gin.Context) {
 	e := err.Error()
-	if e == "EOF" {
+	switch e {
+	case "EOF":
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "请求体格式错误"})
-		return
+	default:
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": e})
 	}
-	ctx.JSON(http.StatusBadRequest, gin.H{"error": e})
 }

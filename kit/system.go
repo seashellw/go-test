@@ -1,35 +1,48 @@
 package kit
 
 import (
+	"bytes"
+	"encoding/json"
+	"io/ioutil"
 	"os"
 	"os/exec"
 )
 
-type System struct{}
-
-func (sys System) getCmd(dir string, params ...string) *exec.Cmd {
+func getCmd(dir string, params ...string) *exec.Cmd {
 	LogBlue(append([]string{">", dir}, params...)...)
 	cmd := exec.Command("PowerShell", params...)
+	cmd.Dir = dir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Dir = dir
 	return cmd
 }
 
-func (sys System) Sync(dir string, params ...string) System {
-	cmd := sys.getCmd(dir, params...)
+func ExecSync(dir string, params ...string) {
+	cmd := getCmd(dir, params...)
 	cmd.Run()
-	return sys
-}
-
-func (sys System) Async(dir string, params ...string) System {
-	cmd := sys.getCmd(dir, params...)
-	cmd.Start()
-	return sys
 }
 
 // 在浏览器中打开链接
 func BrowserOpen(url string) {
-	sys := System{}
-	sys.Async("./", "explorer", url)
+	ExecSync("./", "explorer", url)
+}
+
+var configFileName = "go-config.json"
+
+// 读配置文件，文件应为json格式
+func ReadConfig() string {
+	str := ""
+	file, err := ioutil.ReadFile(configFileName)
+	if err != nil {
+		return str
+	}
+	str = string(file)
+	return str
+}
+
+// 写配置文件，字符串应为json格式
+func WriteConfig(config string) {
+	var out bytes.Buffer
+	json.Indent(&out, []byte(config), "", "  ")
+	ioutil.WriteFile(configFileName, out.Bytes(), 0644)
 }
