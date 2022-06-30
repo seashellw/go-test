@@ -19,6 +19,7 @@ const NavigationBar = defineAsyncComponent(
 </template>
 
 <style scoped>
+
 .h-screen {
   height: 100vh;
   overflow: auto;
