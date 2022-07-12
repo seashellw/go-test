@@ -1,4 +1,4 @@
-import { mkdir, rename, rm } from "fs/promises";
+import { copyFile, mkdir, rm } from "fs/promises";
 
 export const clean = async () => {
   await rm("./build", { recursive: true });
@@ -6,7 +6,7 @@ export const clean = async () => {
 };
 
 export const cloneBuildAssets = async () => {
-  await rename(
+  await copyFile(
     "./frontend/src/assets/appicon.png",
     "./build/appicon.png"
   );
