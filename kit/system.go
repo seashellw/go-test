@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"sync"
 )
 
 func getCmd(dir string, params ...string) *exec.Cmd {
@@ -29,8 +30,12 @@ func BrowserOpen(url string) {
 
 var configFileName = "go-config.json"
 
+var configLock = sync.RWMutex{}
+
 // 读配置文件，文件应为json格式
 func ReadConfig() string {
+	configLock.RLock()
+	defer configLock.RUnlock()
 	str := ""
 	file, err := ioutil.ReadFile(configFileName)
 	if err != nil {
@@ -42,6 +47,8 @@ func ReadConfig() string {
 
 // 写配置文件，字符串应为json格式
 func WriteConfig(config string) {
+	configLock.Lock()
+	defer configLock.Unlock()
 	var out bytes.Buffer
 	json.Indent(&out, []byte(config), "", "  ")
 	ioutil.WriteFile(configFileName, out.Bytes(), 0644)

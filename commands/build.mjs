@@ -1,10 +1,12 @@
+import { rename } from "fs/promises";
 import { $ } from "zx";
-import { rm, rename, mkdir } from "fs/promises";
+import { clean, cloneBuildAssets } from "./kit.mjs";
 
-await $`pnpm vue-tsc --noEmit`;
-await $`pnpm vite build`;
-await $`go build`;
+await clean();
+await cloneBuildAssets();
 
-await rm("./dist", { recursive: true });
-await mkdir("./dist");
-await rename("./go-test.exe", "./dist/go.exe");
+await $`wails build`;
+
+await rename("./build/bin/go.exe", "./go.exe");
+await clean();
+await rename("./go.exe", "./build/go.exe");

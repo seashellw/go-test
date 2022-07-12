@@ -2,9 +2,16 @@
 import { Icon, Menu, MenuItem, Tooltip } from "tdesign-vue-next";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { MainRoutes } from "../router";
+import { Routes } from "../router";
 const route = useRoute();
 const router = useRouter();
+const MainRoutes = Routes.filter((item) => item.meta?.show).map(
+  (item) => ({
+    path: item.path,
+    title: item.meta?.title,
+    icon: item.meta?.icon,
+  })
+);
 
 const path = computed(
   () => `/${route.path.split("/").filter((v) => v)[0] || ""}`

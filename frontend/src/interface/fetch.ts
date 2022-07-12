@@ -1,4 +1,4 @@
-import { post } from "interface";
+import { post } from ".";
 
 export interface Request {
   Url: string;

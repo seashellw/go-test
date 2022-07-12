@@ -22,3 +22,7 @@ func getLogStr(params ...string) string {
 func LogBlue(params ...string) {
 	cliutil.Blueln(getLogStr(params...))
 }
+
+func LogRed(params ...string) {
+	cliutil.Redln(getLogStr(params...))
+}

@@ -2,22 +2,11 @@
   "name": "client",
   "scripts": {
     "dev": "node ./commands/dev.mjs",
-    "dev:server": "go run . -u nil",
-    "build": "node ./commands/build.mjs",
-    "preview": "pnpm ./dist/go.exe"
+    "build": "node ./commands/build.mjs"
   },
   "dependencies": {
     "@types/node": "^18.0.0",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vueuse/core": "^8.7.5",
-    "pinia": "^2.0.14",
     "prettier": "^2.7.1",
-    "tdesign-vue-next": "^0.17.2",
-    "typescript": "^4.7.4",
-    "vite": "^2.9.13",
-    "vue": "^3.2.37",
-    "vue-router": "^4.0.16",
-    "vue-tsc": "^0.34.17",
     "zx": "^7.0.3"
   }
 }
