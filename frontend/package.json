@@ -2,6 +2,7 @@
   "name": "frontend",
   "scripts": {
     "dev": "vite",
+    "dev:app": "cd .. && pnpm dev",
     "build": "vite build"
   },
   "dependencies": {

@@ -1,30 +1,54 @@
 <script setup lang="ts">
-import { Aside, Content, Layout } from "tdesign-vue-next";
-import { defineAsyncComponent, Suspense } from "vue";
-import { RouterView } from "vue-router";
+import { Aside, Content, Layout, Header } from "tdesign-vue-next";
+import { ref, Suspense, watchEffect } from "vue";
+import { RouterView, useRoute } from "vue-router";
+import NavigationBar from "./components/NavigationBar.vue";
 import Config from "./config/Config.vue";
-const NavigationBar = defineAsyncComponent(
-  () => import("./components/NavigationBar.vue")
-);
+
+const route = useRoute();
+const title = ref("");
+watchEffect(() => {
+  title.value = `${route.matched[0].meta.title}`;
+});
 </script>
 
 <template>
-  <Layout>
-    <Aside width="auto" class="h-screen">
+  <Layout data-wails-drag>
+    <Aside width="auto" class="left-nav-bar">
       <NavigationBar />
     </Aside>
-    <Content class="h-screen">
-      <RouterView />
-      <Suspense>
-        <Config />
-      </Suspense>
-    </Content>
+    <Layout>
+      <Header height="2rem" class="header">
+        <span class="title">
+          {{ title }}
+        </span>
+      </Header>
+      <Content data-wails-no-drag class="content">
+        <RouterView />
+        <Suspense>
+          <Config />
+        </Suspense>
+      </Content>
+    </Layout>
   </Layout>
 </template>
 
 <style scoped>
-.h-screen {
+.left-nav-bar {
   height: 100vh;
   overflow: auto;
+}
+
+.title {
+  margin: 0 1rem;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+.content {
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>

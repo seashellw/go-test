@@ -10,6 +10,7 @@ interface Response {
 
 export const fetchConfig = async (data?: Config) => {
   if (data && typeof data === "object") {
+
     await post<undefined, Response>("/api/configSet", {
       Config: JSON.stringify(data),
     });

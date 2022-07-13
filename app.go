@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"go-test/kit"
 )
 
 // App struct
@@ -21,13 +21,10 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) domready(ctx context.Context) {
-	// if runtime.Environment(ctx).BuildType != "production" {
-	// 	runtime.BrowserOpenURL(ctx, "http://localhost:34115")
-	// }
+func (a *App) ConfigGet() string {
+	return kit.ReadConfig()
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
+func (a *App) ConfigSet(config string) {
+	kit.WriteConfig(config)
 }

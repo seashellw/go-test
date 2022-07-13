@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { fetchConfig } from "@/interface/config";
 import { useDebounceFn } from "@vueuse/core";
-import { watch } from "vue";
+import { watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useConfig } from ".";
 
@@ -15,15 +15,12 @@ if (res.route && res.route !== route.path) {
   router.push(res.route);
 }
 
-watch(
-  () => route.path,
-  () => {
-    config.route = route.path;
-  }
-);
+watchEffect(() => {
+  config.route = route.path;
+});
 
 const setConfig = useDebounceFn(fetchConfig, 3000);
-watch(config, () => {
+watchEffect(() => {
   const { route } = config;
   setConfig({ route });
 });
