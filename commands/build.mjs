@@ -4,8 +4,8 @@ import { clean, cloneBuildAssets } from "./kit.mjs";
 
 await clean();
 await cloneBuildAssets();
-
-await $`wails build`;
+await $`cd ./frontend && pnpm build`;
+await $`wails build -s -clean`;
 
 await rename("./build/bin/go.exe", "./go.exe");
 await clean();

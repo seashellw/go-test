@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"go-test/kit"
+	"go-test/lib"
 )
 
 // App struct
@@ -22,9 +22,9 @@ func (a *App) startup(ctx context.Context) {
 }
 
 func (a *App) ConfigGet() string {
-	return kit.ReadConfig()
+	return lib.ConfigRead()
 }
 
 func (a *App) ConfigSet(config string) {
-	kit.WriteConfig(config)
+	lib.ConfigWrite(config)
 }

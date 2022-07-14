@@ -1,53 +1,40 @@
 <script setup lang="ts">
-import { Aside, Content, Layout, Header } from "tdesign-vue-next";
-import { ref, Suspense, watchEffect } from "vue";
-import { RouterView, useRoute } from "vue-router";
+import { Aside, Content, Layout } from "tdesign-vue-next";
+import { KeepAlive } from "vue";
+import { RouterView } from "vue-router";
 import NavigationBar from "./components/NavigationBar.vue";
 import Config from "./config/Config.vue";
-
-const route = useRoute();
-const title = ref("");
-watchEffect(() => {
-  title.value = `${route.matched[0].meta.title}`;
-});
 </script>
 
 <template>
-  <Layout data-wails-drag>
-    <Aside width="auto" class="left-nav-bar">
+  <Layout class="layout">
+    <Aside width="4rem" class="aside">
       <NavigationBar />
     </Aside>
-    <Layout>
-      <Header height="2rem" class="header">
-        <span class="title">
-          {{ title }}
-        </span>
-      </Header>
-      <Content data-wails-no-drag class="content">
-        <RouterView />
-        <Suspense>
-          <Config />
-        </Suspense>
-      </Content>
-    </Layout>
+    <Content class="content">
+      <RouterView v-slot="{ Component }">
+        <KeepAlive>
+          <component :is="Component" />
+        </KeepAlive>
+      </RouterView>
+      <Config />
+    </Content>
   </Layout>
 </template>
 
 <style scoped>
-.left-nav-bar {
+.layout {
   height: 100vh;
-  overflow: auto;
+  width: 100vw;
+  overflow: hidden;
+  background-color: transparent;
 }
-
-.title {
-  margin: 0 1rem;
-}
-.header {
-  display: flex;
-  align-items: center;
+.aside {
+  height: 100vh;
 }
 .content {
-  height: calc(100vh - 2rem);
+  height: 100vh;
+  width: calc(100vw - 4rem);
   overflow-y: auto;
   overflow-x: hidden;
 }

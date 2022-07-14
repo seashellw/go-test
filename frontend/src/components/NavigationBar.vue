@@ -22,7 +22,7 @@ const handleChange = (value: string) => {
 };
 </script>
 <template>
-  <Menu theme="dark" :value="path" :collapsed="true">
+  <Menu class="menu" theme="dark" :value="path" :collapsed="true">
     <Tooltip
       v-for="item in MainRoutes"
       :key="item.path"
@@ -37,3 +37,8 @@ const handleChange = (value: string) => {
     </Tooltip>
   </Menu>
 </template>
+<style scoped>
+.menu {
+  background-color: transparent;
+}
+</style>

@@ -1,39 +1,18 @@
-package kit
+package lib
 
 import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"os"
-	"os/exec"
 	"sync"
 )
-
-func getCmd(dir string, params ...string) *exec.Cmd {
-	LogBlue(append([]string{">", dir}, params...)...)
-	cmd := exec.Command("PowerShell", params...)
-	cmd.Dir = dir
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd
-}
-
-func ExecSync(dir string, params ...string) {
-	cmd := getCmd(dir, params...)
-	cmd.Run()
-}
-
-// 在浏览器中打开链接
-func BrowserOpen(url string) {
-	ExecSync("./", "explorer", url)
-}
 
 var configFileName = "go-config.json"
 
 var configLock = sync.RWMutex{}
 
 // 读配置文件，文件应为json格式
-func ReadConfig() string {
+func ConfigRead() string {
 	configLock.RLock()
 	defer configLock.RUnlock()
 	str := ""
@@ -46,7 +25,7 @@ func ReadConfig() string {
 }
 
 // 写配置文件，字符串应为json格式
-func WriteConfig(config string) {
+func ConfigWrite(config string) {
 	configLock.Lock()
 	defer configLock.Unlock()
 	var out bytes.Buffer

@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/Home.vue";
-import Config from "@/pages/Config.vue";
 import { Component } from "vue";
 
 interface RouteItem {
@@ -17,7 +15,7 @@ interface RouteItem {
 export const Routes: RouteItem[] = [
   {
     path: "/",
-    component: Home,
+    component: () => import("@/pages/Home.vue"),
     meta: {
       title: "面板",
       icon: "app",
@@ -26,7 +24,7 @@ export const Routes: RouteItem[] = [
   },
   {
     path: "/config",
-    component: Config,
+    component: () => import("@/pages/Config.vue"),
     meta: {
       icon: "control-platform",
       title: "配置",
