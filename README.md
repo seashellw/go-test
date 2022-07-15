@@ -1,6 +1,17 @@
-# Vue 3 + TypeScript + Vite + Go
+# Vue 3 + Go
 
-桌面工具应用程序
+简单的桌面工具应用程序
+
+## 开发环境
+
+使用前需安装 Node.js，Go
+
+随后安装 pnpm，wails
+
+```shell
+iwr https://get.pnpm.io/install.ps1 -useb | iex
+go install github.com/wailsapp/wails/v2/cmd/wails@latest
+```
 
 ## 构建
 
@@ -13,4 +24,10 @@ pnpm build
 
 ```shell
 ./build/go.exe
+```
+
+## 开发预览
+
+```shell
+pnpm dev
 ```
