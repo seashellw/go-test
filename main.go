@@ -21,10 +21,11 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Width:     1024,
-		Height:    768,
-		Assets:    assets,
-		OnStartup: app.startup,
+		Width:            1024,
+		Height:           768,
+		Assets:           assets,
+		OnStartup:        app.startup,
+		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
 		Bind: []interface{}{
 			app,
 		},

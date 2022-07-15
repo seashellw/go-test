@@ -31,6 +31,7 @@ import Config from "./config/Config.vue";
 }
 .aside {
   height: 100vh;
+  background-color: transparent;
 }
 .content {
   height: 100vh;
