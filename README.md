@@ -12,5 +12,5 @@ pnpm build
 ## 启动
 
 ```shell
-./dist/go.exe
+./build/go.exe
 ```
