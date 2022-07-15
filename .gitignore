@@ -12,3 +12,6 @@ pnpm-lock.yaml
 *.exe
 
 go-config.json
+build
+package.json.md5
+wailsjs

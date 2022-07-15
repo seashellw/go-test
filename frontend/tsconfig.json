@@ -12,7 +12,11 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "wails/*": ["wailsjs/*"]
+    }
   },
   "include": [
     "vite.config.ts",
@@ -20,6 +24,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "interface/**/*.ts"
+    "wailsjs/**/*.ts",
+    "wailsjs/**/*.js",
+    "wailsjs/**/*.d.ts"
   ]
 }

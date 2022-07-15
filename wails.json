@@ -1,0 +1,8 @@
+{
+  "name": "go-test",
+  "outputfilename": "go",
+  "frontend:install": "pnpm install",
+  "frontend:build": "pnpm build",
+  "frontend:dev:watcher": "pnpm dev",
+  "frontend:dev:serverUrl": "http://localhost:3000"
+}
