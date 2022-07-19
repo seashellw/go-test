@@ -13,7 +13,7 @@ const route = useRoute();
   const res = await getConfig();
   config.$state = res;
   if (res.route && res.route !== route.path) {
-    router.push(res.route);
+    await router.push(res.route);
   }
 
   watchEffect(() => {
