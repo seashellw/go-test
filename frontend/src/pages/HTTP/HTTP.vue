@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import CodeHighlight from "@/components/CodeHighlight.vue";
 import { useConfig } from "@/config";
-import { format } from "@/interface/prettier";
-import { computed, ref } from "vue";
-import { Input, Space, Button } from "tdesign-vue-next";
 import { fetchHTTP, Request, Response } from "@/interface/fetch";
-import { MessagePlugin } from "tdesign-vue-next";
+import { format } from "@/interface/prettier";
+import { Button, MessagePlugin, Space } from "tdesign-vue-next";
+import { computed, ref } from "vue";
+import Method from "./Method.vue";
+import URL from "./URL.vue";
 
 const config = useConfig();
 
@@ -28,7 +29,6 @@ const fetch = async () => {
     await MessagePlugin.warning("请输入URL");
     return;
   }
-  console.log(request.value);
   let res = await fetchHTTP(request.value);
   console.log(res);
   response.value = res;
@@ -37,11 +37,11 @@ const fetch = async () => {
 
 <template>
   <div class="mr-2 mt-2">
-    <Space size="small" align="center">
-      <span> URL </span>
-      <Input v-model="request.Url" />
+    <Space size="large" break-line>
+      <URL v-model="request.Url" />
+      <Method v-model="request.Method" />
+      <Button @click="fetch"> 发送 </Button>
     </Space>
-    <Button @click="fetch"> 发送</Button>
     <CodeHighlight :text="responseText" type="json" />
   </div>
 </template>
