@@ -61,8 +61,8 @@ func HttpFetch(request *HttpRequest) *HttpResponse {
 		response.Cookie[cookie.Name] = cookie.Value
 	}
 	response.Header = map[string]string{}
-	for key := range newReq.Header {
-		response.Header[key] = newReq.Header.Get(key)
+	for key := range newRes.Header {
+		response.Header[key] = newRes.Header.Get(key)
 	}
 	return &response
 }
