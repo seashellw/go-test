@@ -1,3 +1,5 @@
+import { useThrottleFn } from "@vueuse/core";
+
 declare const prettier: any;
 declare const prettierPlugins: any;
 declare const Prism: any;
@@ -13,8 +15,9 @@ export const format = (text: string, type: string) => {
   }
 };
 
-export const highlightAll = () => {
+export const highlightAll = useThrottleFn(() => {
   requestIdleCallback(() => {
     Prism.highlightAll();
+    console.log("已刷新全局代码高亮");
   });
-};
+}, 1000);

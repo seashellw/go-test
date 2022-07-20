@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import CodeHighlight from "@/components/CodeHighlight.vue";
 import { useConfig } from "@/config";
-import { Button } from "tdesign-vue-next";
+import { format } from "@/interface/prettier";
+import { computed } from "vue";
+
 const config = useConfig();
+const configText = computed(() => {
+  return format(JSON.stringify(config.config), "json");
+});
 </script>
+
 <template>
-  <div>
-    <Button class="margin"> config </Button>
+  <div class="mr-2">
+    <CodeHighlight type="json" :text="configText" />
   </div>
 </template>
-<style scoped>
-.margin {
-  margin: 1rem;
-}
-</style>
+
+<style scoped></style>

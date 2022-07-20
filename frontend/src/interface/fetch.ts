@@ -1,4 +1,4 @@
-import { post } from ".";
+import { HttpFetch } from "wails/go/main/App";
 
 export interface Request {
   Url: string;
@@ -22,5 +22,8 @@ export interface Response {
   };
 }
 
-export const fetchFetch = (data: Request) =>
-  post<Response, Request>("/api/fetch", data);
+export const fetchHTTP: (
+  request: Request
+) => Promise<Response> = async (request) => {
+  return (await HttpFetch(request as any)) as any;
+};

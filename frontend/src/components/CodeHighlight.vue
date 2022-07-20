@@ -10,12 +10,13 @@ const props = defineProps<{
 }>();
 
 watch(
-  () => props.type,
+  props,
   () => {
     highlightAll();
   },
   {
     immediate: true,
+    flush: "post",
   }
 );
 
@@ -24,12 +25,19 @@ const { copy } = useClipboard({
 });
 </script>
 <template>
-  <div class="component" v-show="text">
-    <pre class="code"><code class="code"
-                            :class="`language-${type}`">{{
+  <div class="rounded my-2 overflow-hidden relative" v-show="text">
+    <pre class="code"><code
+      class="code"
+      :class="`language-${type}`"
+    >{{
         props.text
       }}</code></pre>
-    <Button shape="square" class="copy-button" variant="text">
+    <Button
+      shape="square"
+      class="copy-button"
+      variant="text"
+      @click="copy()"
+    >
       <template #icon>
         <Icon name="attach" />
       </template>
@@ -38,20 +46,14 @@ const { copy } = useClipboard({
 </template>
 
 <style scoped>
-.component {
-  margin: 0.5rem 0;
-  border-radius: 0.2rem;
-  overflow: hidden;
-  position: relative;
-}
-
 .code {
   margin: 0;
+  min-height: 4rem;
 }
 
 .copy-button {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  right: 0.3rem;
+  top: 0.3rem;
 }
 </style>

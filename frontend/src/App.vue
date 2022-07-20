@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { Aside, Content, Layout } from "tdesign-vue-next";
-import { KeepAlive } from "vue";
-import { RouterView, useRoute } from "vue-router";
+import { Suspense } from "vue";
+import { RouterView } from "vue-router";
 import NavigationBar from "./components/NavigationBar.vue";
 import Config from "./config/Config.vue";
-
-const route = useRoute();
 </script>
 
 <template>
@@ -14,12 +12,10 @@ const route = useRoute();
       <NavigationBar />
     </Aside>
     <Content class="content">
-      <RouterView v-slot="{ Component }">
-        <KeepAlive>
-          <component :is="Component" :key="route.path" />
-        </KeepAlive>
-      </RouterView>
-      <Config />
+      <RouterView />
+      <Suspense>
+        <Config />
+      </Suspense>
     </Content>
   </Layout>
 </template>
@@ -29,7 +25,7 @@ const route = useRoute();
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .aside {

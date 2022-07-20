@@ -1,33 +1,11 @@
 @import url("tdesign-vue-next/es/style/index.css");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   color-scheme: dark;
-}
-
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-label {
-  margin: 0;
-  padding: 0;
-}
-
-ol,
-ul {
-  list-style: none;
 }
 
 * {

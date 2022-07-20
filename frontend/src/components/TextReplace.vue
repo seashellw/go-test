@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { Input, Button, Icon } from "tdesign-vue-next";
+import { Button, Icon, Input } from "tdesign-vue-next";
 import { computed, ref } from "vue";
+import { Space } from "tdesign-vue-next";
 
 const props = defineProps<{
   modelValue: string;
@@ -25,32 +26,16 @@ const handleReplace = () => {
 };
 </script>
 <template>
-  <div class="component">
-    <Input class="input" v-model="regText" />
-    <Button variant="text" @click="handleReplace">
-      <span> 替换为 </span>
-      <template #icon>
-        <Icon name="chevron-right-double" />
-      </template>
-    </Button>
-    <Input class="input" v-model="replaceText" />
-  </div>
+  <Space size="small" align="center">
+    <Input v-model="regText" placeholder="正则表达式" />
+    <Icon name="chevron-right-double" />
+    <Input v-model="replaceText" placeholder="替换文本" />
+    <Button @click="handleReplace"> 替换</Button>
+  </Space>
 </template>
 
 <style scoped>
-.component {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-}
-
 .input {
   width: auto;
-}
-
-.component span {
-  white-space: nowrap;
 }
 </style>

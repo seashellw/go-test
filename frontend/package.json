@@ -6,16 +6,19 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.6",
     "@vitejs/plugin-vue": "^2.3.3",
-    "@vueuse/core": "^8.7.5",
-    "pinia": "^2.0.14",
+    "@vueuse/core": "^8.9.4",
+    "autoprefixer": "^10.4.7",
+    "pinia": "^2.0.16",
+    "postcss": "^8.4.14",
     "prettier": "^2.7.1",
-    "tdesign-vue-next": "^0.17.2",
+    "tailwindcss": "^3.1.6",
+    "tdesign-vue-next": "^0.17.5",
     "typescript": "^4.7.4",
-    "vite": "^2.9.13",
+    "vite": "^2.9.14",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.16",
+    "vue-router": "^4.1.2",
     "vue-tsc": "^0.34.17"
   }
 }
