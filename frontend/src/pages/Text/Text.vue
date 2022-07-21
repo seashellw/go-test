@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import CodeHighlight from "@/components/CodeHighlight.vue";
-import Replace from "@/components/TextReplace.vue";
+import TextReplace from "@/components/TextReplace.vue";
 import { format } from "@/interface/prettier";
 import { ControlType } from "@/pages/Text/Control";
 import ControlBar from "@/pages/Text/ControlBar.vue";
-import { Space, Textarea } from "tdesign-vue-next";
+import { Textarea } from "tdesign-vue-next";
 import { computed, ref } from "vue";
 
 const inputText = ref("");
@@ -35,9 +35,9 @@ const transformRes = computed(() => {
 <template>
   <div>
     <div class="mr-2 mt-2 flex flex-col gap-2">
-      <Replace v-model="inputText" />
+      <TextReplace v-model="inputText" />
       <ControlBar v-model="type" />
-      <Textarea v-model="inputText" placeholder="源文本" />
+      <Textarea v-model="inputText" placeholder="请输入源文本" />
       <CodeHighlight
         :text="transformRes.text"
         :type="transformRes.type"

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ControlType } from "@/pages/Text/Control";
 import { useVModel } from "@vueuse/core";
-
-import { Select, Space } from "tdesign-vue-next";
+import { Select } from "tdesign-vue-next";
 
 const props = defineProps<{
   modelValue: ControlType;
@@ -20,10 +19,14 @@ const options: { label: string; value: ControlType }[] = [
 </script>
 
 <template>
-  <Space size="small" align="center">
-    <span> 处理模式 </span>
-    <Select v-model="type" :options="options" />
-  </Space>
+  <div class="flex items-center gap-1">
+    <span> 处理模式： </span>
+    <Select class="select" v-model="type" :options="options" />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.select {
+  width: 15rem;
+}
+</style>

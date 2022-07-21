@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { ChevronsRight, Replace } from "@vicons/tabler";
+import { Icon } from "@vicons/utils";
 import { useVModel } from "@vueuse/core";
-import { Button, Icon, Input } from "tdesign-vue-next";
+import { Button, Input } from "tdesign-vue-next";
 import { computed, ref } from "vue";
-import { Space } from "tdesign-vue-next";
 
 const props = defineProps<{
   modelValue: string;
@@ -26,16 +27,25 @@ const handleReplace = () => {
 };
 </script>
 <template>
-  <Space size="small" align="center">
+  <div class="flex items-center gap-2">
     <Input v-model="regText" placeholder="正则表达式" />
-    <Icon name="chevron-right-double" />
+    <Icon size="1.3rem">
+      <ChevronsRight />
+    </Icon>
     <Input v-model="replaceText" placeholder="替换文本" />
-    <Button @click="handleReplace"> 替换</Button>
-  </Space>
+    <Button @click="handleReplace" class="button">
+      替换
+      <template #icon>
+        <Icon size="1rem" class="mr-1">
+          <Replace />
+        </Icon>
+      </template>
+    </Button>
+  </div>
 </template>
 
 <style scoped>
-.input {
-  width: auto;
+.button {
+  width: 8rem;
 }
 </style>

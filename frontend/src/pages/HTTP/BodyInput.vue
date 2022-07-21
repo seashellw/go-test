@@ -25,6 +25,7 @@ const handleFormat = () => {
   <div class="w-full">
     <div class="flex items-center mb-1 gap-2">
       <span> 请求体： </span>
+      <span class="flex-grow"></span>
       <Button size="small" ghost @click="handleFormat">
         <span> 格式化 </span>
         <template #icon>
