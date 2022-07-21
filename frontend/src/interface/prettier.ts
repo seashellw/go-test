@@ -18,6 +18,5 @@ export const format = (text: string, type: string) => {
 export const highlightAll = useThrottleFn(() => {
   requestIdleCallback(() => {
     Prism.highlightAll();
-    console.log("已刷新全局代码高亮");
   });
 }, 1000);
