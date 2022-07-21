@@ -31,6 +31,12 @@ import Config from "./config/Config.vue";
 .aside {
   height: 100vh;
   background-color: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.aside::-webkit-scrollbar {
+  display: none;
 }
 
 .content {

@@ -1,8 +1,19 @@
 <script setup lang="ts">
-import { Icon, Menu, MenuItem, Tooltip } from "tdesign-vue-next";
+import { Routes } from "@/router";
+import { Compass, Refresh } from "@vicons/tabler";
+import { Icon } from "@vicons/utils";
+import {
+  Button,
+  Dropdown,
+  DropdownMenu,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from "tdesign-vue-next";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { Routes } from "@/router";
+import { WindowReloadApp } from "wails/runtime/runtime";
+
 const route = useRoute();
 const router = useRouter();
 const MainRoutes = Routes.filter((item) => item.meta?.show).map(
@@ -20,6 +31,8 @@ const path = computed(
 const handleChange = (value: string) => {
   if (path.value !== value) router.push(value);
 };
+
+const handleReload = WindowReloadApp;
 </script>
 <template>
   <Menu class="menu" theme="dark" :value="path" :collapsed="true">
@@ -31,14 +44,52 @@ const handleChange = (value: string) => {
     >
       <MenuItem :value="item.path" @click="handleChange(item.path)">
         <template #icon>
-          <Icon :name="item.icon" />
+          <Icon size="1.5rem" tag="button" color="white">
+            <component :is="item.icon" />
+          </Icon>
         </template>
       </MenuItem>
     </Tooltip>
+    <template #operations>
+      <Dropdown trigger="click" placement="right-bottom">
+        <Button variant="text" class="operation-button">
+          <template #icon>
+            <Icon size="1.5rem">
+              <Compass />
+            </Icon>
+          </template>
+        </Button>
+        <template #dropdown>
+          <DropdownMenu>
+            <Button variant="text" @click="handleReload">
+              <span> 重载 </span>
+              <template #icon>
+                <Icon size="1.2rem" class="mr-1">
+                  <Refresh />
+                </Icon>
+              </template>
+            </Button>
+          </DropdownMenu>
+        </template>
+      </Dropdown>
+    </template>
   </Menu>
 </template>
 <style scoped>
 .menu {
   background-color: transparent;
+}
+
+.menu :deep(.t-menu__operations) {
+  margin: 0;
+  border: 0;
+  padding: 8px;
+}
+
+.operation-button {
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  margin: 0;
 }
 </style>

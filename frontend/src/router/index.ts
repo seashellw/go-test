@@ -1,3 +1,9 @@
+import {
+  Armchair,
+  Command,
+  Edit,
+  PlugConnected,
+} from "@vicons/tabler";
 import { Component } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -8,7 +14,7 @@ interface RouteItem {
     // 标题
     title?: string;
     // 图标
-    icon?: string;
+    icon?: Component;
     // 是否显示于侧边栏
     show?: boolean;
   };
@@ -21,7 +27,7 @@ export const Routes: RouteItem[] = [
     component: () => import("@/pages/Home.vue"),
     meta: {
       title: "面板",
-      icon: "app",
+      icon: Armchair,
       show: true,
     },
   },
@@ -30,7 +36,7 @@ export const Routes: RouteItem[] = [
     component: () => import("@/pages/Text/Text.vue"),
     meta: {
       title: "文本处理",
-      icon: "edit",
+      icon: Edit,
       show: true,
     },
   },
@@ -39,7 +45,7 @@ export const Routes: RouteItem[] = [
     component: () => import("@/pages/HTTP/HTTP.vue"),
     meta: {
       title: "HTTP接口测试",
-      icon: "internet",
+      icon: PlugConnected,
       show: true,
     },
   },
@@ -47,7 +53,7 @@ export const Routes: RouteItem[] = [
     path: "/config",
     component: () => import("@/pages/Config.vue"),
     meta: {
-      icon: "save",
+      icon: Command,
       title: "配置",
       show: true,
     },

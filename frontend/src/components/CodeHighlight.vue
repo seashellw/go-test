@@ -2,7 +2,9 @@
 import { highlightAll } from "@/interface/prettier";
 import { useClipboard } from "@vueuse/core";
 import { toRef, watch } from "vue";
-import { Button, Icon } from "tdesign-vue-next";
+import { Button, Tooltip } from "tdesign-vue-next";
+import { Icon } from "@vicons/utils";
+import { ClipboardPlus } from "@vicons/tabler";
 
 const props = defineProps<{
   type: string;
@@ -32,16 +34,20 @@ const { copy } = useClipboard({
     >{{
         props.text
       }}</code></pre>
-    <Button
-      shape="square"
-      class="copy-button"
-      variant="text"
-      @click="copy()"
-    >
-      <template #icon>
-        <Icon name="attach" />
-      </template>
-    </Button>
+    <Tooltip content="复制">
+      <Button
+        shape="square"
+        class="copy-button"
+        variant="text"
+        @click="copy()"
+      >
+        <template #icon>
+          <Icon size="1.2rem">
+            <ClipboardPlus />
+          </Icon>
+        </template>
+      </Button>
+    </Tooltip>
   </div>
 </template>
 

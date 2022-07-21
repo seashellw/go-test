@@ -21,10 +21,10 @@ const options: { label: string; value: string }[] = [
 </script>
 
 <template>
-  <Space size="small" align="center" class="box">
-    <span> 请求方法 </span>
+  <div class="flex items-center gap-1">
+    <span> 请求方法： </span>
     <Select class="select" v-model="type" :options="options" />
-  </Space>
+  </div>
 </template>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { Space, Input } from "tdesign-vue-next";
+import { Input } from "tdesign-vue-next";
 
 const props = defineProps<{
   modelValue: string;
@@ -11,14 +11,14 @@ const text = useVModel(props, "modelValue", emit);
 </script>
 
 <template>
-  <Space size="small" align="center">
-    <span> URL </span>
+  <div class="flex items-center gap-1">
+    <span> URL： </span>
     <Input autofocus clearable class="input" v-model="text" />
-  </Space>
+  </div>
 </template>
 
 <style scoped>
 .input {
-  width: 25rem;
+  flex-grow: 1;
 }
 </style>
