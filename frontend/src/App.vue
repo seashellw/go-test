@@ -4,6 +4,9 @@ import { Suspense } from "vue";
 import { RouterView } from "vue-router";
 import NavigationBar from "./components/NavigationBar.vue";
 import Config from "./config/Config.vue";
+import { useRouterTransition } from "./hooks/useRouterTransition";
+
+const transitionName = useRouterTransition();
 </script>
 
 <template>
@@ -12,7 +15,13 @@ import Config from "./config/Config.vue";
       <NavigationBar />
     </Aside>
     <Content class="content">
-      <RouterView />
+      <RouterView v-slot="{ Component, route }">
+        <transition :name="transitionName">
+          <KeepAlive>
+            <component :is="Component" :key="route.path" />
+          </KeepAlive>
+        </transition>
+      </RouterView>
       <Suspense>
         <Config />
       </Suspense>
@@ -44,5 +53,6 @@ import Config from "./config/Config.vue";
   width: calc(100vw - 4rem);
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 </style>

@@ -34,7 +34,7 @@ const transformRes = computed(() => {
 </script>
 <template>
   <div>
-    <div class="mr-2 mt-2 flex flex-col gap-2">
+    <div class="pr-2 mt-2 flex flex-col gap-2">
       <TextReplace v-model="inputText" />
       <ControlBar v-model="type" />
       <Textarea v-model="inputText" placeholder="请输入源文本" />

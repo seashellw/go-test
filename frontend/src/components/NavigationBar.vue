@@ -24,9 +24,9 @@ const MainRoutes = Routes.filter((item) => item.meta?.show).map(
   })
 );
 
-const path = computed(
-  () => `/${route.path.split("/").filter((v) => v)[0] || ""}`
-);
+const path = computed(() => {
+  return route.matched[0]?.path || "/";
+});
 
 const handleChange = (value: string) => {
   if (path.value !== value) router.push(value);

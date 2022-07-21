@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import CodeHighlight from "@/components/CodeHighlight.vue";
 import { format } from "@/interface/prettier";
+import { isStrJson } from "@/lib/json";
 import { computed } from "vue";
-import { isStrJson } from "./util";
 
 const props = defineProps<{
   data?: string;

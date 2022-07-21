@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { format } from "@/interface/prettier";
+import { isStrJson } from "@/lib/json";
 import { Eraser } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import { useVModel } from "@vueuse/core";
 import { Button, MessagePlugin, Textarea } from "tdesign-vue-next";
-import { isStrJson } from "./util";
 const props = defineProps<{
   modelValue: string;
 }>();

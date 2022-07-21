@@ -46,7 +46,7 @@ const responseText = computed(() => {
 </script>
 
 <template>
-  <div class="my-2 mr-2">
+  <div class="my-2 pr-2">
     <div class="flex flex-wrap gap-2">
       <URL v-model="req.Url" class="url" />
       <BodyInput v-model="req.Data" />
