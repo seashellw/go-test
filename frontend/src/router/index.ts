@@ -33,7 +33,7 @@ export const Routes: RouteItem[] = [
   },
   {
     path: "/text",
-    component: () => import("@/pages/Text/Text.vue"),
+    component: () => import("@/pages/Text"),
     meta: {
       title: "文本处理",
       icon: Edit,
@@ -42,7 +42,7 @@ export const Routes: RouteItem[] = [
   },
   {
     path: "/http",
-    component: () => import("@/pages/HTTP/HTTP.vue"),
+    component: () => import("@/pages/HTTP"),
     meta: {
       title: "HTTP接口测试",
       icon: PlugConnected,
@@ -51,7 +51,7 @@ export const Routes: RouteItem[] = [
   },
   {
     path: "/system",
-    component: () => import("@/pages/System/System.vue"),
+    component: () => import("@/pages/System"),
     meta: {
       icon: Command,
       title: "系统",
