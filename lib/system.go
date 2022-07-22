@@ -3,6 +3,10 @@ package lib
 import (
 	"os"
 	"os/exec"
+	"time"
+
+	"github.com/shirou/gopsutil/v3/cpu"
+	"github.com/shirou/gopsutil/v3/mem"
 )
 
 func getCmd(dir string, params ...string) *exec.Cmd {
@@ -22,4 +26,14 @@ func SysExecSync(dir string, params ...string) {
 // 在浏览器中打开链接
 func SysBrowserOpen(url string) {
 	SysExecSync("./", "explorer", url)
+}
+
+func SysGetCpuPercent() float64 {
+	percent, _ := cpu.Percent(time.Second, false)
+	return percent[0]
+}
+
+func SysGetMemPercent() float64 {
+	memInfo, _ := mem.VirtualMemory()
+	return memInfo.UsedPercent
 }

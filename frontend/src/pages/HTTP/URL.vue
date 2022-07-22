@@ -13,7 +13,7 @@ const text = useVModel(props, "modelValue", emit);
 <template>
   <div class="flex items-center gap-1">
     <span> URL： </span>
-    <Input autofocus clearable class="input" v-model="text" />
+    <Input clearable class="input" v-model="text" />
   </div>
 </template>
 

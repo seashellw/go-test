@@ -51,8 +51,7 @@ const transitionName = useRouterTransition();
 .content {
   height: 100vh;
   width: calc(100vw - 4rem);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 }
 </style>

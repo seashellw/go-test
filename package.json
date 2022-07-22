@@ -2,11 +2,12 @@
   "name": "client",
   "scripts": {
     "dev": "node ./commands/dev.mjs",
-    "build": "node ./commands/build.mjs"
+    "build": "node ./commands/build.mjs",
+    "up:all": "wails update -pre && pnpm up && cd frontend && pnpm up"
   },
   "dependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.6",
     "prettier": "^2.7.1",
-    "zx": "^7.0.3"
+    "zx": "^7.0.7"
   }
 }

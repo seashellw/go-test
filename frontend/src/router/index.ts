@@ -26,7 +26,7 @@ export const Routes: RouteItem[] = [
     path: "/",
     component: () => import("@/pages/Home.vue"),
     meta: {
-      title: "面板",
+      title: "主屏",
       icon: Armchair,
       show: true,
     },
@@ -50,11 +50,11 @@ export const Routes: RouteItem[] = [
     },
   },
   {
-    path: "/config",
-    component: () => import("@/pages/Config.vue"),
+    path: "/system",
+    component: () => import("@/pages/System/System.vue"),
     meta: {
       icon: Command,
-      title: "配置",
+      title: "系统",
       show: true,
     },
   },

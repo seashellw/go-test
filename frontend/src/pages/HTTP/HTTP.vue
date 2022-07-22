@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useConfig } from "@/config";
+import Page from "@/components/Page.vue";
 import { fetchHTTP, Request, Response } from "@/interface/fetch";
 import { format } from "@/interface/prettier";
 import HeaderTable from "@/pages/HTTP/HeaderTable.vue";
@@ -12,8 +12,6 @@ import BodyJsonPreview from "./BodyJsonPreview.vue";
 import CookieTable from "./CookieTable.vue";
 import Method from "./Method.vue";
 import URL from "./URL.vue";
-
-const config = useConfig();
 
 const req = ref<Request>({
   Url: "http://152.136.121.30:8080/api/user/logIn",
@@ -46,7 +44,7 @@ const responseText = computed(() => {
 </script>
 
 <template>
-  <div class="my-2 pr-2">
+  <Page class="py-2 pr-2">
     <div class="flex flex-wrap gap-2">
       <URL v-model="req.Url" class="url" />
       <BodyInput v-model="req.Data" />
@@ -65,7 +63,7 @@ const responseText = computed(() => {
       <HeaderTable :header="res?.Header" />
       <CookieTable :cookie="res?.Cookie" />
     </div>
-  </div>
+  </Page>
 </template>
 
 <style scoped>

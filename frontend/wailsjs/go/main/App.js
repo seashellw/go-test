@@ -13,3 +13,11 @@ export function ConfigSet(arg1) {
 export function HttpFetch(arg1) {
   return window['go']['main']['App']['HttpFetch'](arg1);
 }
+
+export function SysGetCpuPercent() {
+  return window['go']['main']['App']['SysGetCpuPercent']();
+}
+
+export function SysGetMemPercent() {
+  return window['go']['main']['App']['SysGetMemPercent']();
+}

@@ -2,15 +2,15 @@ package lib
 
 import (
 	"strings"
-	"time"
 
 	"github.com/gookit/goutil/cliutil"
+	"github.com/gookit/goutil/timex"
 )
 
 func getLogStr(params ...string) string {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString("[")
-	stringBuilder.WriteString(time.Now().Format("15:04:05"))
+	stringBuilder.WriteString(timex.Now().DateFormat("H:I:S"))
 	stringBuilder.WriteString("]")
 	for _, val := range params {
 		stringBuilder.WriteString(" ")

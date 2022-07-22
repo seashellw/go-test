@@ -19,8 +19,11 @@ watchEffect(() => {
   };
 });
 
-watch(config, () => {
-  config.fetchSetConfig();
-});
+watch(
+  () => config.config,
+  () => {
+    config.fetchSetConfig();
+  }
+);
 </script>
 <template></template>

@@ -7,3 +7,7 @@ export function ConfigGet():Promise<string>;
 export function ConfigSet(arg1:string):void;
 
 export function HttpFetch(arg1:lib.HttpRequest):Promise<lib.HttpResponse>;
+
+export function SysGetCpuPercent():Promise<number>;
+
+export function SysGetMemPercent():Promise<number>;

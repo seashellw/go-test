@@ -6,6 +6,7 @@ import { ControlType } from "@/pages/Text/Control";
 import ControlBar from "@/pages/Text/ControlBar.vue";
 import { Textarea } from "tdesign-vue-next";
 import { computed, ref } from "vue";
+import Page from "@/components/Page.vue";
 
 const inputText = ref("");
 
@@ -33,7 +34,7 @@ const transformRes = computed(() => {
 });
 </script>
 <template>
-  <div>
+  <Page>
     <div class="pr-2 mt-2 flex flex-col gap-2">
       <TextReplace v-model="inputText" />
       <ControlBar v-model="type" />
@@ -43,7 +44,7 @@ const transformRes = computed(() => {
         :type="transformRes.type"
       />
     </div>
-  </div>
+  </Page>
 </template>
 
 <style scoped></style>

@@ -13,6 +13,7 @@ import {
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { WindowReloadApp } from "wails/runtime/runtime";
+import ConfigDialog from "./ConfigDialog.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -32,7 +33,7 @@ const handleChange = (value: string) => {
   if (path.value !== value) router.push(value);
 };
 
-const handleReload = WindowReloadApp;
+const handleReload = () => WindowReloadApp();
 </script>
 <template>
   <Menu class="menu" theme="dark" :value="path" :collapsed="true">
@@ -60,7 +61,7 @@ const handleReload = WindowReloadApp;
           </template>
         </Button>
         <template #dropdown>
-          <DropdownMenu>
+          <DropdownMenu class="drop-down">
             <Button variant="text" @click="handleReload">
               <span> 重载 </span>
               <template #icon>
@@ -69,6 +70,7 @@ const handleReload = WindowReloadApp;
                 </Icon>
               </template>
             </Button>
+            <ConfigDialog />
           </DropdownMenu>
         </template>
       </Dropdown>
@@ -84,6 +86,10 @@ const handleReload = WindowReloadApp;
   margin: 0;
   border: 0;
   padding: 8px;
+}
+
+.drop-down button {
+  width: 100%;
 }
 
 .operation-button {
