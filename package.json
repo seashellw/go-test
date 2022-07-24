@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "node ./commands/dev.mjs",
     "build": "node ./commands/build.mjs",
-    "update:all": "wails update -pre && pnpm up && cd frontend && pnpm up"
+    "update": "wails update -pre"
   },
   "dependencies": {
     "@types/node": "^18.0.6",
