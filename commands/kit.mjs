@@ -5,11 +5,6 @@ export const clean = async () => {
   if (existsSync("./build")) await rm("./build", { recursive: true });
   await mkdir("./build");
   if (!existsSync("./frontend/dist")) await mkdir("./frontend/dist");
-  if (!existsSync("./frontend/dist/index.html"))
-    await writeFile(
-      "./frontend/dist/index.html",
-      "再次运行 pnpm build"
-    );
 };
 
 export const cloneBuildAssets = async () => {

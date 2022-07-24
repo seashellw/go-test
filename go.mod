@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/gookit/goutil v0.5.7
+	github.com/rs/xid v1.4.0
 	github.com/wailsapp/wails/v2 v2.0.0-beta.39.2
 )
 

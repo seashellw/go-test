@@ -1,7 +1,8 @@
 import {
   Armchair,
-  Command,
+  DeviceDesktopAnalytics,
   Edit,
+  Folders,
   PlugConnected,
 } from "@vicons/tabler";
 import { Component } from "vue";
@@ -50,11 +51,20 @@ export const Routes: RouteItem[] = [
     },
   },
   {
+    path: "/File",
+    component: () => import("@/pages/File"),
+    meta: {
+      title: "文件系统",
+      icon: Folders,
+      show: true,
+    },
+  },
+  {
     path: "/system",
     component: () => import("@/pages/System"),
     meta: {
-      icon: Command,
-      title: "系统",
+      icon: DeviceDesktopAnalytics,
+      title: "计算机",
       show: true,
     },
   },

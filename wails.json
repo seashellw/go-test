@@ -1,6 +1,6 @@
 {
-  "name": "go-test",
-  "outputfilename": "go",
+  "name": "toolkit",
+  "outputfilename": "toolkit",
   "frontend:install": "pnpm install",
   "frontend:build": "pnpm build",
   "frontend:dev:watcher": "pnpm dev",

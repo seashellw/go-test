@@ -6,6 +6,6 @@ await clean();
 await cloneBuildAssets();
 await $`wails build`;
 
-await rename("./build/bin/go.exe", "./go.exe");
+await rename("./build/bin/toolkit.exe", "./toolkit.exe");
 await clean();
-await rename("./go.exe", "./build/go.exe");
+await rename("./toolkit.exe", "./build/toolkit.exe");
