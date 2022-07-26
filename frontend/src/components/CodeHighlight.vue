@@ -27,7 +27,7 @@ const { copy } = useClipboard({
 });
 </script>
 <template>
-  <div class="rounded my-2 overflow-hidden relative" v-show="text">
+  <div class="rounded my-2 overflow-hidden relative" v-if="text">
     <pre class="code"><code
       class="code"
       :class="`language-${type}`"
