@@ -8,7 +8,7 @@ import {
   SysGetMemPercent,
 } from "wails/go/main/App";
 
-const REFRESH_INTERVAL = 500;
+const REFRESH_INTERVAL = 1000;
 
 const container = ref<HTMLElement | undefined>(undefined);
 
@@ -84,7 +84,7 @@ useIntervalFn(async () => {
 
 onMounted(async () => {
   if (!container.value) return;
-  let length = Math.round(width.value / 2);
+  let length = Math.round(width.value / 3);
   let now = Date.now();
   let cpu = await SysGetCpuPercent();
   cpu = Math.round(cpu * 10) / 10;
@@ -104,7 +104,7 @@ onMounted(async () => {
         name: "内存",
       }
     );
-    now = now - 100;
+    now = now - REFRESH_INTERVAL;
   }
   data.value = li;
   options.value.data = data.value;

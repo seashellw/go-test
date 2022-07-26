@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { highlightAll } from "@/interface/prettier";
-import { ClipboardPlus } from "@vicons/tabler";
+import { Copy } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import { useClipboard } from "@vueuse/core";
 import { Button, Tooltip } from "tdesign-vue-next";
@@ -43,7 +43,7 @@ const { copy } = useClipboard({
       >
         <template #icon>
           <Icon size="1.2rem">
-            <ClipboardPlus />
+            <Copy />
           </Icon>
         </template>
       </Button>
@@ -59,7 +59,7 @@ const { copy } = useClipboard({
 
 .copy-button {
   position: absolute;
-  right: 0.3rem;
-  top: 0.3rem;
+  right: 0.2rem;
+  top: 0.2rem;
 }
 </style>

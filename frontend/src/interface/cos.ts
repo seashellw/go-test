@@ -128,13 +128,16 @@ export const fetchFileList = (space: string) =>
     );
   });
 
-export const fetchDeleteFile = (key: string) =>
+export const fetchDeleteFile = (item: {
+  space: string;
+  name: string;
+}) =>
   new Promise<boolean>((resolve) => {
     cos.deleteObject(
       {
         Bucket,
         Region,
-        Key: key,
+        Key: generateKey(item),
       },
       function (err) {
         if (err) {
