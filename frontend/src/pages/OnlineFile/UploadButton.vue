@@ -64,6 +64,8 @@ const handleClickUpload = () => {
   <Button
     @click="handleClickUpload"
     :disabled="fileList.isSpaceError"
+    variant="outline"
+    theme="primary"
   >
     <span> 上传文件 </span>
     <template #icon>

@@ -3,6 +3,7 @@ import {
   DeviceDesktopAnalytics,
   Edit,
   Folders,
+  Cloud,
   PlugConnected,
 } from "@vicons/tabler";
 import { Component } from "vue";
@@ -51,11 +52,20 @@ export const Routes: RouteItem[] = [
     },
   },
   {
-    path: "/File",
-    component: () => import("@/pages/File"),
+    path: "/LocalFile",
+    component: () => import("@/pages/LocalFile"),
     meta: {
-      title: "文件系统",
+      title: "本地文件",
       icon: Folders,
+      show: true,
+    },
+  },
+  {
+    path: "/OnlineFile",
+    component: () => import("@/pages/OnlineFile"),
+    meta: {
+      title: "在线文件",
+      icon: Cloud,
       show: true,
     },
   },

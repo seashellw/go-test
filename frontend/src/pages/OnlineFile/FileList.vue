@@ -61,7 +61,7 @@ const handleClickSpace = (item: { space: string }) => {
         <Tooltip :content="`下载：${item.name}`">
           <button
             @click="handleDownload(item)"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
           >
             {{ item.name }}
           </button>
