@@ -13,7 +13,6 @@ import (
 //go:embed frontend/dist
 var assets embed.FS
 
-// 主程序
 func main() {
 	test()
 

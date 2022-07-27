@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"sync"
 )
 
 type FileItem struct {
@@ -33,7 +32,7 @@ func FileHash(path string) string {
 	return hex.EncodeToString(md5h.Sum(nil))
 }
 
-func FileGetAllFileList(path string) *[]*FileItem {
+func FileGetAllFileList(path string) []*FileItem {
 	list := []*FileItem{}
 	filepath.Walk(path, func(path string, info fs.FileInfo, _ error) error {
 		if !info.IsDir() {
@@ -46,18 +45,18 @@ func FileGetAllFileList(path string) *[]*FileItem {
 		}
 		return nil
 	})
-	return &list
+	return list
 }
 
-func FileReadDir(path string) *[]*FileItem {
+func FileReadDir(path string) []*FileItem {
 	list := []*FileItem{}
 	dir, err := os.Stat(path)
 	if err != nil || !dir.IsDir() {
-		return &list
+		return list
 	}
 	infoList, err := ioutil.ReadDir(path)
 	if err != nil {
-		return &list
+		return list
 	}
 	for _, value := range infoList {
 		item := &FileItem{
@@ -70,36 +69,5 @@ func FileReadDir(path string) *[]*FileItem {
 		}
 		list = append(list, item)
 	}
-	return &list
-}
-
-func FindDuplicateFile(path string) *[]*[]*FileItem {
-	dir, err := os.Stat(path)
-	if err != nil || !dir.IsDir() {
-		return &[]*[]*FileItem{}
-	}
-	hashMap := map[string]*[]*FileItem{}
-	wg := sync.WaitGroup{}
-	for _, value := range *FileGetAllFileList(path) {
-		wg.Add(1)
-		item := *value
-		go func() {
-			defer wg.Done()
-			hash := FileHash(item.Path)
-			list, ok := hashMap[hash]
-			if !ok {
-				hashMap[hash] = &[]*FileItem{}
-			}
-			newList := append(*list, &item)
-			hashMap[hash] = &newList
-		}()
-	}
-	wg.Wait()
-	list := []*[]*FileItem{}
-	for _, value := range hashMap {
-		if len(*value) > 1 {
-			list = append(list, value)
-		}
-	}
-	return &list
+	return list
 }
