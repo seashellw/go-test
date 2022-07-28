@@ -18,4 +18,7 @@ export default defineConfig({
       port: 3001,
     },
   },
+  build: {
+    reportCompressedSize: false,
+  },
 });
