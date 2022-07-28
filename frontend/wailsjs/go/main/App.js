@@ -10,6 +10,22 @@ export function ConfigSet(arg1) {
   return window['go']['main']['App']['ConfigSet'](arg1);
 }
 
+export function DialogDirSelect() {
+  return window['go']['main']['App']['DialogDirSelect']();
+}
+
+export function FileGetAllFileList(arg1) {
+  return window['go']['main']['App']['FileGetAllFileList'](arg1);
+}
+
+export function FileHash(arg1) {
+  return window['go']['main']['App']['FileHash'](arg1);
+}
+
+export function FileReadDir(arg1) {
+  return window['go']['main']['App']['FileReadDir'](arg1);
+}
+
 export function HttpFetch(arg1) {
   return window['go']['main']['App']['HttpFetch'](arg1);
 }

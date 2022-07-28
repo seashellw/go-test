@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"go-test/lib"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // App struct
@@ -31,4 +33,24 @@ func (a *App) SysGetCpuPercent() float64 {
 
 func (a *App) SysGetMemPercent() float64 {
 	return lib.SysGetMemPercent()
+}
+
+func (a *App) FileGetAllFileList(path string) []*lib.FileItem {
+	return lib.FileGetAllFileList(path)
+}
+
+func (a *App) FileHash(path string) string {
+	return lib.FileHash(path)
+}
+
+func (a *App) FileReadDir(path string) []*lib.FileItem {
+	return lib.FileReadDir(path)
+}
+
+func (a *App) DialogDirSelect() string {
+	dir, err := runtime.OpenDirectoryDialog(a.ctx, runtime.OpenDialogOptions{})
+	if err != nil {
+		return ""
+	}
+	return dir
 }

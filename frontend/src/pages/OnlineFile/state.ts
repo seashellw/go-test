@@ -17,7 +17,7 @@ const init: () => {
   uploadList: [],
 });
 
-export const useFileList = defineStore("fileList", {
+export const useFileList = defineStore("onlineFileList", {
   state: init,
   getters: {
     isSpaceError: (state) => {

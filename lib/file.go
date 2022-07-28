@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type FileItem struct {
@@ -49,6 +50,9 @@ func FileGetAllFileList(path string) []*FileItem {
 }
 
 func FileReadDir(path string) []*FileItem {
+	if strings.HasSuffix(path, `:`) {
+		path = path + `\`
+	}
 	list := []*FileItem{}
 	dir, err := os.Stat(path)
 	if err != nil || !dir.IsDir() {

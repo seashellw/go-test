@@ -1,5 +1,10 @@
+import { useThrottleFn } from "@vueuse/core";
 import { defineStore } from "pinia";
+import { watch, watchEffect } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { ConfigGet, ConfigSet } from "wails/go/main/App";
+
+const setConfig = useThrottleFn(ConfigSet, 1000);
 
 export interface Config {
   route?: {
@@ -9,9 +14,7 @@ export interface Config {
 
 const init: () => Config = () => ({});
 
-let configFetchTimer = 0;
-
-export const useConfig = defineStore("config", {
+export const useConfig = defineStore("globalConfig", {
   state: init,
   getters: {
     config: (state) => ({
@@ -20,10 +23,7 @@ export const useConfig = defineStore("config", {
   },
   actions: {
     fetchSetConfig() {
-      if (configFetchTimer) clearTimeout(configFetchTimer);
-      setTimeout(() => {
-        ConfigSet(JSON.stringify(this.config));
-      }, 1000);
+      setConfig(JSON.stringify(this.config));
     },
     async fetchGetConfig() {
       let res = await ConfigGet();
@@ -38,3 +38,28 @@ export const useConfig = defineStore("config", {
     },
   },
 });
+
+export const useConfigInit = async () => {
+  const config = useConfig();
+  const router = useRouter();
+  const route = useRoute();
+
+  const { route: oldRoute } = await config.fetchGetConfig();
+
+  if (oldRoute?.path && oldRoute?.path !== route.path) {
+    await router.push(oldRoute?.path);
+  }
+
+  watch(
+    () => config.config,
+    () => {
+      config.fetchSetConfig();
+    }
+  );
+
+  watchEffect(() => {
+    config.route = {
+      path: route.path,
+    };
+  });
+};

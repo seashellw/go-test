@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "toolkit",
   "scripts": {
     "dev": "node ./commands/dev.mjs",
     "build": "node ./commands/build.mjs",

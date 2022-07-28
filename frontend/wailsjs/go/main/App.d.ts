@@ -6,6 +6,14 @@ export function ConfigGet():Promise<string>;
 
 export function ConfigSet(arg1:string):void;
 
+export function DialogDirSelect():Promise<string>;
+
+export function FileGetAllFileList(arg1:string):Promise<Array<lib.FileItem>>;
+
+export function FileHash(arg1:string):Promise<string>;
+
+export function FileReadDir(arg1:string):Promise<Array<lib.FileItem>>;
+
 export function HttpFetch(arg1:lib.HttpRequest):Promise<lib.HttpResponse>;
 
 export function SysGetCpuPercent():Promise<number>;

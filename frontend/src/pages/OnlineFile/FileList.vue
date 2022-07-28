@@ -61,7 +61,7 @@ const handleClickSpace = (item: { space: string }) => {
         <Tooltip :content="`下载：${item.name}`">
           <button
             @click="handleDownload(item)"
-            class="cursor-pointer hover:underline"
+            class="hover:underline"
           >
             {{ item.name }}
           </button>
@@ -90,7 +90,9 @@ const handleClickSpace = (item: { space: string }) => {
 .list {
   border-radius: 0.3rem;
 }
-
+.list li {
+  height: 2.5rem;
+}
 .list li:last-child::after {
   display: none;
 }

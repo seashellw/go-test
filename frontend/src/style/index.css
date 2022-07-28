@@ -17,3 +17,7 @@ html {
 .t-dialog__ctx .t-dialog__wrap {
   z-index: 10;
 }
+
+.t-list .t-list-item {
+  content-visibility: auto;
+}

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Page from "@/components/Page.vue";
-import AreaCPU from "./AreaCPU.vue";
+import { defineAsyncComponent } from "vue";
+const AreaCPU = defineAsyncComponent(() => import("./AreaCPU.vue"));
 </script>
 
 <template>
