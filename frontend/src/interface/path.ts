@@ -3,7 +3,7 @@ import {
   FileGetAllFileList,
   FileHash,
   FileReadDir,
-} from "wails/go/main/App";
+} from "wails/go/app/App";
 
 export const getExtensionName = (path: string) =>
   path.slice(path.lastIndexOf("."));

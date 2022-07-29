@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"embed"
-	"go-test/lib"
+	"go-test/app"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -14,31 +14,27 @@ import (
 var assets embed.FS
 
 func main() {
-	test()
+	go test()
 
-	// Create an instance of the app structure
-	app := &App{}
+	this := &app.App{}
 
-	// Create application with options
-	err := wails.Run(&options.App{
+	go app.StartRouter(this)
+
+	wails.Run(&options.App{
 		Width:            1024,
 		Height:           768,
 		Assets:           assets,
-		OnStartup:        func(ctx context.Context) { app.ctx = ctx },
+		OnStartup:        func(ctx context.Context) { this.Ctx = ctx },
 		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
-		Bind: []interface{}{
-			app,
-		},
+		Bind:             []interface{}{this},
 		Windows: &windows.Options{
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
 		},
 	})
 
-	if err != nil {
-		lib.LogRed(err.Error())
-	}
 }
 
 func test() {
+
 }

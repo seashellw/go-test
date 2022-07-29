@@ -2,7 +2,7 @@ import { useThrottleFn } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { ConfigGet, ConfigSet } from "wails/go/main/App";
+import { ConfigGet, ConfigSet } from "wails/go/app/App";
 
 const setConfig = useThrottleFn(ConfigSet, 1000);
 

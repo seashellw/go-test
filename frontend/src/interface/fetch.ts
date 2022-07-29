@@ -1,4 +1,4 @@
-import { HttpFetch } from "wails/go/main/App";
+import { HttpFetch } from "wails/go/app/App";
 
 export interface Request {
   Url: string;

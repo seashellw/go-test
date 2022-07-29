@@ -16,7 +16,7 @@ interface RouteItem {
     // 标题
     title?: string;
     // 图标
-    icon?: Component;
+    icon?: any;
     // 是否显示于侧边栏
     show?: boolean;
   };

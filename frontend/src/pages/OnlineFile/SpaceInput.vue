@@ -15,17 +15,15 @@ watchThrottled(
 );
 
 const inputStatus = computed(() => {
+  if (!fileList.space) return "default";
   if (fileList.isSpaceError) return "warning";
   return undefined;
 });
 </script>
 <template>
-  <div class="">
-    <Input
-      label="空间代码："
-      v-model="fileList.space"
-      :status="inputStatus"
-    />
+  <div class="flex items-center gap-1">
+    <span class="whitespace-nowrap"> 空间代码： </span>
+    <Input v-model="fileList.space" :status="inputStatus" />
   </div>
 </template>
 

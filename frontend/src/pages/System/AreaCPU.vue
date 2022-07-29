@@ -3,10 +3,7 @@ import { Mutable } from "@/lib/type";
 import { Line, LineOptions } from "@antv/g2plot";
 import { useElementBounding, useIntervalFn } from "@vueuse/core";
 import { computed, onMounted, ref } from "vue";
-import {
-  SysGetCpuPercent,
-  SysGetMemPercent,
-} from "wails/go/main/App";
+import { SysGetCpuPercent, SysGetMemPercent } from "wails/go/app/App";
 
 const REFRESH_INTERVAL = 1000;
 

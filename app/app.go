@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 
 // App struct
 type App struct {
-	ctx context.Context
+	Ctx context.Context
 }
 
 // 读取配置文件
@@ -48,7 +48,7 @@ func (a *App) FileReadDir(path string) []*lib.FileItem {
 }
 
 func (a *App) DialogDirSelect() string {
-	dir, err := runtime.OpenDirectoryDialog(a.ctx, runtime.OpenDialogOptions{})
+	dir, err := runtime.OpenDirectoryDialog(a.Ctx, runtime.OpenDialogOptions{})
 	if err != nil {
 		return ""
 	}
