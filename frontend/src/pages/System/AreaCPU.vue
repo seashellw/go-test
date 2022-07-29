@@ -2,7 +2,7 @@
 import { Mutable } from "@/lib/type";
 import { Line, LineOptions } from "@antv/g2plot";
 import { useElementBounding, useIntervalFn } from "@vueuse/core";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import {
   SysGetCpuPercent,
   SysGetMemPercent,
@@ -57,56 +57,52 @@ const options = ref<Mutable<LineOptions>>({
 let area: Line | undefined = undefined;
 
 const { width } = useElementBounding(container);
+const xLength = computed(() => {
+  return Math.round(width.value / 7);
+});
+
+const pushData = (
+  percent: { cpu: number; mem: number },
+  now?: number
+) => {
+  now = now || Date.now();
+  data.value.push(
+    {
+      value: percent.cpu,
+      time: now,
+      name: "CPU",
+    },
+    {
+      value: percent.mem,
+      time: now,
+      name: "内存",
+    }
+  );
+};
 
 useIntervalFn(async () => {
-  let percent = await SysGetCpuPercent();
-  percent = Math.round(percent * 10) / 10;
-  let now = Date.now();
-  data.value.push({
-    value: percent,
-    time: now,
-    name: "CPU",
+  pushData({
+    cpu: Math.round(await SysGetCpuPercent()),
+    mem: Math.round(await SysGetMemPercent()),
   });
-  percent = await SysGetMemPercent();
-  percent = Math.round(percent * 10) / 10;
-  data.value.push({
-    value: percent,
-    time: now,
-    name: "内存",
-  });
-  let length = Math.round(width.value / 2);
-  if (data.value.length > length) {
-    data.value = data.value.slice(0 - length);
+  if (data.value.length > xLength.value) {
+    data.value = data.value.slice(0 - xLength.value);
   }
-  options.value.data = data.value;
-  area?.changeData(options.value.data);
+  area?.changeData(data.value);
 }, REFRESH_INTERVAL);
 
 onMounted(async () => {
   if (!container.value) return;
-  let length = Math.round(width.value / 3);
   let now = Date.now();
-  let cpu = await SysGetCpuPercent();
-  cpu = Math.round(cpu * 10) / 10;
-  let mem = await SysGetMemPercent();
-  mem = Math.round(mem * 10) / 10;
-  let li: typeof data.value = [];
-  while (li.length < length) {
-    li.push(
-      {
-        value: cpu,
-        time: now,
-        name: "CPU",
-      },
-      {
-        value: mem,
-        time: now,
-        name: "内存",
-      }
-    );
+  data.value = [];
+  const percent = {
+    cpu: Math.round(await SysGetCpuPercent()),
+    mem: Math.round(await SysGetMemPercent()),
+  };
+  while (data.value.length < xLength.value) {
     now = now - REFRESH_INTERVAL;
+    pushData(percent, now);
   }
-  data.value = li;
   options.value.data = data.value;
   area = new Line(container.value, options.value);
   area.render();

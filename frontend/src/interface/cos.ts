@@ -96,7 +96,7 @@ export interface FileItem {
 }
 
 export const fetchFileList = (space: string) =>
-  new Promise<FileItem[]>((resolve) => {
+  new Promise<FileItem[] | undefined>((resolve) => {
     cos.getBucket(
       {
         Bucket,
@@ -106,7 +106,7 @@ export const fetchFileList = (space: string) =>
       function (err, data) {
         if (err) {
           console.error(err);
-          resolve([]);
+          resolve(undefined);
           return;
         }
         let resList: FileItem[] = [];
@@ -114,7 +114,7 @@ export const fetchFileList = (space: string) =>
           let keyObj = parseKey(item.Key);
           if (!keyObj) {
             console.log("文件key解析错误", item.Key);
-            resolve([]);
+            resolve(undefined);
             return;
           }
           resList.push({

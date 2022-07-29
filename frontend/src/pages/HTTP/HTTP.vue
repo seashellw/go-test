@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import Page from "@/components/Page.vue";
 import { fetchHTTP, Request, Response } from "@/interface/fetch";
-import { format } from "@/interface/prettier";
+import Error from "@/pages/HTTP/Error.vue";
 import HeaderTable from "@/pages/HTTP/HeaderTable.vue";
 import { Send } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import { Button, MessagePlugin } from "tdesign-vue-next";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import BodyInput from "./BodyInput.vue";
 import BodyJsonPreview from "./BodyJsonPreview.vue";
 import CookieTable from "./CookieTable.vue";
@@ -33,18 +33,16 @@ const fetch = async () => {
     await MessagePlugin.warning("请输入URL");
     return;
   }
-  let data = await fetchHTTP(req.value);
-  console.log(data);
-  res.value = data;
+  res.value = await fetchHTTP(req.value);
+  if (res.value.Error) {
+    await MessagePlugin.error("请求失败");
+    return;
+  }
 };
-
-const responseText = computed(() => {
-  return format(JSON.stringify(res.value || {}), "json");
-});
 </script>
 
 <template>
-  <Page class="py-2 pr-2">
+  <Page class="py-2 pr-2 space-y-2">
     <div class="flex flex-wrap gap-2">
       <URL v-model="req.Url" class="url" />
       <BodyInput v-model="req.Data" />
@@ -58,11 +56,10 @@ const responseText = computed(() => {
         </template>
       </Button>
     </div>
-    <div>
-      <BodyJsonPreview :data="res?.Data" />
-      <HeaderTable :header="res?.Header" />
-      <CookieTable :cookie="res?.Cookie" />
-    </div>
+    <Error :data="res?.Error" />
+    <BodyJsonPreview :data="res?.Data" />
+    <HeaderTable :header="res?.Header" />
+    <CookieTable :cookie="res?.Cookie" />
   </Page>
 </template>
 

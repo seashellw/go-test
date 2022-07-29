@@ -13,13 +13,14 @@ export interface Request {
 }
 
 export interface Response {
-  Data: string;
+  Data?: string;
   Cookie: {
     [key: string]: string;
   };
   Header: {
     [key: string]: string;
   };
+  Error?: {};
 }
 
 export const fetchHTTP: (

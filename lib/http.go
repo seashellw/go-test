@@ -25,6 +25,7 @@ type HttpResponse struct {
 	// 响应Cookie
 	Cookie map[string]string
 	Header map[string]string
+	Error  string
 }
 
 func HttpFetch(request *HttpRequest) *HttpResponse {
@@ -47,7 +48,7 @@ func HttpFetch(request *HttpRequest) *HttpResponse {
 	newRes, err := http.DefaultClient.Do(newReq)
 	if err != nil {
 		return &HttpResponse{
-			Data:   err.Error(),
+			Error:  err.Error(),
 			Cookie: map[string]string{},
 			Header: map[string]string{},
 		}

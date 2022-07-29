@@ -34,7 +34,7 @@ const columns: BaseTableColumns = [
 </script>
 
 <template>
-  <div v-if="data?.length" class="rounded overflow-hidden mt-2">
+  <div v-if="data?.length" class="rounded overflow-hidden">
     <Table
       rowKey="key"
       tableLayout="auto"

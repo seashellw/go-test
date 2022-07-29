@@ -18,7 +18,6 @@ export const useFileList = defineStore("localFileList", {
         this.list = [];
         return;
       }
-      console.log(this.dir);
       this.list = await readDir(this.dir);
       return this.list;
     },
