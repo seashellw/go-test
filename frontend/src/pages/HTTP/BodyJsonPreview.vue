@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CodeHighlight from "@/components/CodeHighlight";
-import CollapseTransition from "@/components/CollapseTransition.vue";
 import { format } from "@/interface/prettier";
 import { isStrJson } from "@/lib/json";
 import { computed } from "vue";
@@ -18,11 +17,9 @@ const bodyStr = computed(() => {
 </script>
 
 <template>
-  <CollapseTransition :show="bodyStr">
-    <div class="py-4">
-      <CodeHighlight :text="bodyStr" type="json" />
-    </div>
-  </CollapseTransition>
+  <div class="py-4">
+    <CodeHighlight :text="bodyStr" v-if="bodyStr" type="json" />
+  </div>
 </template>
 
 <style scoped></style>
