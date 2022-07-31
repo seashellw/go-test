@@ -5,8 +5,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/shirou/gopsutil/v3/cpu"
-	"github.com/shirou/gopsutil/v3/mem"
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/mem"
 )
 
 func getCmd(dir string, params ...string) *exec.Cmd {

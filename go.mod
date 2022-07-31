@@ -7,9 +7,10 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/gookit/goutil v0.5.7
 	github.com/rs/xid v1.4.0
-	github.com/shirou/gopsutil/v3 v3.22.6
 	github.com/wailsapp/wails/v2 v2.0.0-beta.39.2
 )
+
+require github.com/google/go-cmp v0.5.8 // indirect
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -30,7 +31,6 @@ require (
 	github.com/leaanthony/gosod v1.0.3 // indirect
 	github.com/leaanthony/slicer v1.6.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/lufia/plan9stats v0.0.0-20220517141722-cf486979b281 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -38,8 +38,8 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
 	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c // indirect
 	github.com/rivo/uniseg v0.3.1 // indirect
+	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.5.0 // indirect
 	github.com/tkrajina/go-reflector v0.5.6 // indirect
