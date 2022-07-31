@@ -3,7 +3,7 @@ import { Aside, Content, Layout } from "tdesign-vue-next";
 import { Suspense } from "vue";
 import { RouterView } from "vue-router";
 import NavigationBar from "./components/NavigationBar.vue";
-import Config from "./config/Config.vue";
+import Config from "./config";
 import { useRouterTransition } from "./hooks/useRouterTransition";
 
 const transitionName = useRouterTransition();

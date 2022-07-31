@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { highlightAll } from "@/interface/prettier";
-import { Copy } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import { useClipboard } from "@vueuse/core";
 import { Button, Tooltip } from "tdesign-vue-next";
 import { toRefs, watch } from "vue";
+import { Copy } from "@vicons/tabler";
 
 const props = defineProps<{
   type: string;

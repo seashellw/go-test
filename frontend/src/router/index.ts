@@ -1,13 +1,13 @@
+import { Component } from "vue";
+import { createRouter, createWebHistory } from "vue-router";
 import {
   Armchair,
+  Cloud,
   DeviceDesktopAnalytics,
   Edit,
   Folders,
-  Cloud,
   PlugConnected,
 } from "@vicons/tabler";
-import { Component } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
 
 interface RouteItem {
   path: string;

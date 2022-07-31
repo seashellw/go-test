@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { reloadApp } from "@/interface/app";
 import { Routes } from "@/router";
-import { Compass, Refresh } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import {
   Button,
@@ -13,6 +11,7 @@ import {
 } from "tdesign-vue-next";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { Compass } from "@vicons/tabler";
 import ConfigDialog from "./ConfigDialog.vue";
 
 const route = useRoute();
@@ -32,8 +31,6 @@ const path = computed(() => {
 const handleChange = (value: string) => {
   if (path.value !== value) router.push(value);
 };
-
-const handleReload = () => reloadApp();
 </script>
 <template>
   <Menu class="menu" theme="dark" :value="path" :collapsed="true">
@@ -62,14 +59,6 @@ const handleReload = () => reloadApp();
         </Button>
         <template #dropdown>
           <DropdownMenu class="drop-down">
-            <Button variant="text" @click="handleReload">
-              <span> 重载 </span>
-              <template #icon>
-                <Icon size="1.2rem" class="mr-1">
-                  <Refresh />
-                </Icon>
-              </template>
-            </Button>
             <ConfigDialog />
           </DropdownMenu>
         </template>

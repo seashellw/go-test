@@ -20,7 +20,7 @@ export interface Response {
   Header: {
     [key: string]: string;
   };
-  Error?: {};
+  Error?: string;
 }
 
 export const fetchHTTP: (

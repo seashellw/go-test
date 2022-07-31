@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import CodeHighlight from "@/components/CodeHighlight.vue";
-import { useConfig } from "@/config";
 import { format } from "@/interface/prettier";
-import { Command, X } from "@vicons/tabler";
 import { Icon } from "@vicons/utils";
 import { Button, Dialog } from "tdesign-vue-next";
 import { computed, ref } from "vue";
+import { Command, X } from "@vicons/tabler";
+import { useConfig } from "@/config";
+
 const visible = ref(false);
 
 const handleSeeConfig = () => {

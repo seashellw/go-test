@@ -28,7 +28,7 @@ watch(
 <template>
   <div
     v-if="list.length"
-    v-bind="containerProps"
+    v-bind="(containerProps as any)"
     class="terminal"
     ref="terminal"
   >
@@ -45,7 +45,7 @@ watch(
   font-size: 12px;
   line-height: 16px;
   overflow-x: hidden;
-  height: 30vh;
+  height: 160px;
   color: #00a870;
   background-color: rgba(26, 79, 112, 0.13);
   padding: 5px;
