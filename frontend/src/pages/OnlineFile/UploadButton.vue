@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { fetchUpload } from "@/interface/cos";
 import { CloudUpload } from "@vicons/tabler";
-import { Icon } from "@vicons/utils";
+import { NIcon } from "naive-ui";
 import { useThrottleFn } from "@vueuse/core";
 import { Button, MessagePlugin } from "tdesign-vue-next";
 import { reactive } from "vue";
@@ -69,9 +69,9 @@ const handleClickUpload = () => {
   >
     <span> 上传文件 </span>
     <template #icon>
-      <Icon size="1.2rem" class="mr-2">
+      <NIcon size="1.2rem" class="mr-2">
         <CloudUpload />
-      </Icon>
+      </NIcon>
     </template>
   </Button>
 </template>

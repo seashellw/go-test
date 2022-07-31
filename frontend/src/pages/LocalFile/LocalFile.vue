@@ -15,7 +15,7 @@ const add = () => {
 </script>
 
 <template>
-  <Page class="pt-2 pr-2 space-y-2">
+  <Page class="space-y-2">
     <SelectBar />
     <FileList />
 

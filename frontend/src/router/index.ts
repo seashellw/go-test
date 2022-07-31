@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import {
   Armchair,
   Cloud,
+  Compass,
   DeviceDesktopAnalytics,
   Edit,
   Folders,
@@ -75,6 +76,15 @@ export const Routes: RouteItem[] = [
     meta: {
       icon: DeviceDesktopAnalytics,
       title: "计算机",
+      show: true,
+    },
+  },
+  {
+    path: "/other",
+    component: () => import("@/pages/Other.vue"),
+    meta: {
+      icon: Compass,
+      title: "其他操作",
       show: true,
     },
   },

@@ -16,7 +16,8 @@
     "paths": {
       "@/*": ["src/*"],
       "wails/*": ["wailsjs/*"]
-    }
+    },
+    "types": ["naive-ui/volar"]
   },
   "include": [
     "vite.config.ts",

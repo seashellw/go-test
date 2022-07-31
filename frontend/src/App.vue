@@ -1,32 +1,59 @@
 <script setup lang="ts">
-import { Aside, Content, Layout } from "tdesign-vue-next";
-import { Suspense } from "vue";
+import {
+  darkTheme,
+  dateZhCN,
+  NConfigProvider,
+  NLayout,
+  NLayoutContent,
+  NLayoutSider,
+  NMessageProvider,
+  zhCN,
+} from "naive-ui";
+import { ref, Suspense } from "vue";
 import { RouterView } from "vue-router";
 import NavigationBar from "./components/NavigationBar.vue";
-import Config from "./config";
 import { useRouterTransition } from "./hooks/useRouterTransition";
+import Config from "./config";
 
 const transitionName = useRouterTransition();
+
+const collapsed = ref(true);
 </script>
 
 <template>
-  <Layout class="layout">
-    <Aside width="4rem" class="aside">
-      <NavigationBar />
-    </Aside>
-    <Content class="content">
-      <RouterView v-slot="{ Component, route }">
-        <transition :name="transitionName">
-          <KeepAlive>
-            <component :is="Component" :key="route.path" />
-          </KeepAlive>
-        </transition>
-      </RouterView>
-      <Suspense>
-        <Config />
-      </Suspense>
-    </Content>
-  </Layout>
+  <NConfigProvider
+    :locale="zhCN"
+    :date-locale="dateZhCN"
+    :theme="darkTheme"
+  >
+    <NMessageProvider>
+      <NLayout has-sider class="layout">
+        <NLayoutSider
+          collapse-mode="width"
+          :collapsed-width="58"
+          :width="240"
+          class="aside"
+          :native-scrollbar="false"
+          :collapsed="collapsed"
+          show-trigger
+          @collapse="collapsed = true"
+          @expand="collapsed = false"
+        >
+          <NavigationBar v-model:collapsed="collapsed" />
+        </NLayoutSider>
+        <NLayoutContent :native-scrollbar="false" class="content">
+          <RouterView v-slot="{ Component, route }">
+            <transition :name="transitionName">
+              <KeepAlive>
+                <component :is="Component" :key="route.path" />
+              </KeepAlive>
+            </transition>
+          </RouterView>
+          <Suspense><Config /></Suspense>
+        </NLayoutContent>
+      </NLayout>
+    </NMessageProvider>
+  </NConfigProvider>
 </template>
 
 <style scoped>
@@ -40,18 +67,16 @@ const transitionName = useRouterTransition();
 .aside {
   height: 100vh;
   background-color: transparent;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.aside::-webkit-scrollbar {
-  display: none;
 }
 
 .content {
   height: 100vh;
-  width: calc(100vw - 4rem);
-  overflow: hidden;
   position: relative;
+  background-color: transparent;
+  border-top-left-radius: 3px;
+}
+
+.aside ::v-deep(.n-layout-toggle-button) {
+  background-color: rgba(255, 255, 255, 0.126);
 }
 </style>

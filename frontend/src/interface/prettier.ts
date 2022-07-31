@@ -1,8 +1,5 @@
-import { useThrottleFn } from "@vueuse/core";
-
 declare const prettier: any;
 declare const prettierPlugins: any;
-declare const Prism: any;
 
 export const format = (text: string, type: string) => {
   try {
@@ -14,9 +11,3 @@ export const format = (text: string, type: string) => {
     return `${e}`;
   }
 };
-
-export const highlightAll = useThrottleFn(() => {
-  requestIdleCallback(() => {
-    Prism.highlightAll();
-  });
-}, 1000);

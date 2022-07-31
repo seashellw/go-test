@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { getDirPath, openDirDialog } from "@/interface/path";
 import { ArrowBigUpLine } from "@vicons/tabler";
-import { Icon } from "@vicons/utils";
+import { NIcon } from "naive-ui";
 import {
   Button,
   Input,
@@ -39,9 +39,9 @@ const handleUp = () => {
     <Tooltip content="回到上层目录">
       <Button @click="handleUp" ghost>
         <template #icon>
-          <Icon size="1.2rem">
+          <NIcon size="1.2rem">
             <ArrowBigUpLine />
-          </Icon>
+          </NIcon>
         </template>
       </Button>
     </Tooltip>

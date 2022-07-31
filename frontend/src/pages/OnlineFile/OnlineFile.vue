@@ -6,7 +6,7 @@ import UploadProgress from "./UploadProgress.vue";
 </script>
 <template>
   <Page>
-    <div class="pr-2 pt-2 space-y-2">
+    <div class="space-y-2">
       <ControlBar />
       <FileList />
       <UploadProgress />

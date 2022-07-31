@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { BaseTableColumns, Table } from "tdesign-vue-next";
+import type { DataTableColumns } from "naive-ui";
+import { NDataTable } from "naive-ui";
+import CollapseTransition from "@/components/CollapseTransition.vue";
 import { computed } from "vue";
 
 const props = defineProps<{
@@ -21,34 +23,29 @@ const data = computed<Row[]>(() => {
   }));
 });
 
-const columns: BaseTableColumns = [
+const columns: DataTableColumns<Row> = [
   {
-    colKey: "key",
+    key: "key",
     title: "响应头",
   },
   {
-    colKey: "value",
+    key: "value",
     title: "值",
   },
 ];
 </script>
 
 <template>
-  <div v-if="data?.length" class="rounded overflow-hidden">
-    <Table
-      rowKey="key"
-      tableLayout="auto"
-      :columns="columns"
-      :data="data"
-      hover
-      size="small"
-      resizable
-    />
-  </div>
+  <CollapseTransition :show="data?.length">
+    <div class="rounded overflow-hidden">
+      <NDataTable
+        :bordered="false"
+        :columns="columns"
+        :data="data"
+        size="small"
+      />
+    </div>
+  </CollapseTransition>
 </template>
 
-<style scoped>
-:deep(.t-table__body) tr:nth-last-of-type(1) td {
-  border-bottom: none;
-}
-</style>
+<style scoped></style>

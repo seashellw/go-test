@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ChevronsRight, Replace } from "@vicons/tabler";
-import { Icon } from "@vicons/utils";
+import { NIcon } from "naive-ui";
 import { useVModel } from "@vueuse/core";
 import { Button, Input } from "tdesign-vue-next";
 import { computed, ref } from "vue";
@@ -29,16 +29,16 @@ const handleReplace = () => {
 <template>
   <div class="flex items-center gap-2">
     <Input v-model="regText" placeholder="正则表达式" />
-    <Icon size="1.3rem">
+    <NIcon size="1.3rem">
       <ChevronsRight />
-    </Icon>
+    </NIcon>
     <Input v-model="replaceText" placeholder="替换文本" />
     <Button @click="handleReplace" class="button">
       替换
       <template #icon>
-        <Icon size="1rem" class="mr-1">
+        <NIcon size="1rem" class="mr-1">
           <Replace />
-        </Icon>
+        </NIcon>
       </template>
     </Button>
   </div>

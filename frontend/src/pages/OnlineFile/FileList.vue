@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { downloadFile, fetchDeleteFile } from "@/interface/cos";
 import { TrashX } from "@vicons/tabler";
-import { Icon } from "@vicons/utils";
+import { NIcon } from "naive-ui";
 import {
   Button,
   DialogPlugin,
@@ -75,9 +75,9 @@ const handleClickSpace = (item: { space: string }) => {
             @click="handleDelete(item)"
           >
             <template #icon>
-              <Icon size="1.2rem">
+              <NIcon size="1.2rem">
                 <TrashX />
-              </Icon>
+              </NIcon>
             </template>
           </Button>
         </Tooltip>

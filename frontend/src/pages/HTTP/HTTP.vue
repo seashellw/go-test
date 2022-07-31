@@ -4,8 +4,7 @@ import { fetchHTTP, Request, Response } from "@/interface/fetch";
 import Error from "@/pages/HTTP/Error.vue";
 import HeaderTable from "@/pages/HTTP/HeaderTable.vue";
 import { Send } from "@vicons/tabler";
-import { Icon } from "@vicons/utils";
-import { Button, MessagePlugin } from "tdesign-vue-next";
+import { NButton, NIcon, useMessage } from "naive-ui";
 import { ref } from "vue";
 import BodyInput from "./BodyInput.vue";
 import BodyJsonPreview from "./BodyJsonPreview.vue";
@@ -23,38 +22,40 @@ const req = ref<Request>({
 
 const res = ref<Response | undefined>(undefined);
 
+const message = useMessage();
+
 const fetch = async () => {
   req.value.Url = req.value.Url.trim();
   if (!req.value.Url.startsWith("http")) {
-    await MessagePlugin.warning("URL不正确");
+    message.warning("URL不正确");
     return;
   }
   if (!req.value.Url) {
-    await MessagePlugin.warning("请输入URL");
+    message.warning("请输入URL");
     return;
   }
   res.value = await fetchHTTP(req.value);
   if (res.value.Error) {
-    await MessagePlugin.error("请求失败");
+    message.error("请求失败");
     return;
   }
 };
 </script>
 
 <template>
-  <Page class="py-2 pr-2 space-y-2">
+  <Page class="space-y-2">
+    <URL v-model="req.Url" class="url" />
+    <BodyInput v-model="req.Data" />
     <div class="flex flex-wrap gap-2">
-      <URL v-model="req.Url" class="url" />
-      <BodyInput v-model="req.Data" />
       <Method v-model="req.Method" />
-      <Button @click="fetch">
+      <NButton @click="fetch">
         发送
         <template #icon>
-          <Icon size="1.1rem" class="mr-1">
+          <NIcon size="1.1rem" class="mr-1">
             <Send />
-          </Icon>
+          </NIcon>
         </template>
-      </Button>
+      </NButton>
     </div>
     <Error :data="res?.Error" />
     <BodyJsonPreview :data="res?.Data" />

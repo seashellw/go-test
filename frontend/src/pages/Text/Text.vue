@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CodeHighlight from "@/components/CodeHighlight.vue";
+import CodeHighlight from "@/components/CodeHighlight";
 import TextReplace from "@/components/TextReplace.vue";
 import { format } from "@/interface/prettier";
 import { ControlType } from "@/pages/Text/Control";
@@ -35,7 +35,7 @@ const transformRes = computed(() => {
 </script>
 <template>
   <Page>
-    <div class="pr-2 mt-2 flex flex-col gap-2">
+    <div class="space-y-2">
       <TextReplace v-model="inputText" />
       <ControlBar v-model="type" />
       <Textarea v-model="inputText" placeholder="请输入源文本" />

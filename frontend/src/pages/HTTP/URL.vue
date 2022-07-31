@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { Input } from "tdesign-vue-next";
+import { NInput } from "naive-ui";
 
 const props = defineProps<{
   modelValue: string;
@@ -11,14 +11,7 @@ const text = useVModel(props, "modelValue", emit);
 </script>
 
 <template>
-  <div class="flex items-center gap-1">
-    <span> URL： </span>
-    <Input clearable class="input" v-model="text" />
-  </div>
+  <NInput clearable v-model:value="text" placeholder="请输入URL" />
 </template>
 
-<style scoped>
-.input {
-  flex-grow: 1;
-}
-</style>
+<style scoped></style>

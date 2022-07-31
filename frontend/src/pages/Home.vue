@@ -2,7 +2,7 @@
 import Page from "@/components/Page.vue";
 </script>
 <template>
-  <Page class="flex flex-col justify-center items-center gap-4">
+  <Page class="flex flex-col justify-center items-center gap-4 h-screen">
     <h1 class="text-center text-lg max-w-[80%]">
       道可道也，非恒道也。名可名也，非恒名也。
       <br />

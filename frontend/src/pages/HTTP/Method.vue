@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { Space, Select } from "tdesign-vue-next";
+import { NSelect } from "naive-ui";
 
 const props = defineProps<{
   modelValue: string;
@@ -21,14 +21,16 @@ const options: { label: string; value: string }[] = [
 </script>
 
 <template>
-  <div class="flex items-center gap-1">
-    <span> 请求方法： </span>
-    <Select class="select" v-model="type" :options="options" />
-  </div>
+  <NSelect
+    placeholder="请选择请求方法"
+    class="select"
+    v-model:value="type"
+    :options="options"
+  />
 </template>
 
 <style scoped>
 .select {
-  width: 7rem;
+  width: 10rem;
 }
 </style>
