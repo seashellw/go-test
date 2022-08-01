@@ -1,99 +1,143 @@
 <script setup lang="ts">
+import CollapseTransition from "@/components/CollapseTransition.vue";
 import { downloadFile, fetchDeleteFile } from "@/interface/cos";
-import { TrashX } from "@vicons/tabler";
-import { NIcon } from "naive-ui";
 import {
-  Button,
-  DialogPlugin,
-  List,
-  ListItem,
-  MessagePlugin,
-  Tag,
-  Tooltip,
-} from "tdesign-vue-next";
+  NTag,
+  useDialog,
+  useMessage,
+  NButton,
+  NTooltip,
+  NIcon,
+} from "naive-ui";
+import { computed } from "vue";
 import { useFileList } from "./state";
+import { TrashX, CloudDownload } from "@vicons/tabler";
 
 const fileList = useFileList();
 
-const handleDownload = (item: { space: string; name: string }) => {
-  downloadFile(item);
-};
+interface Row {
+  name: string;
+  space: string;
+}
 
-const handleDelete = (item: { space: string; name: string }) => {
-  const dialog = DialogPlugin.confirm({
-    header: `确定删除吗？`,
-    body: `${item.name}`,
-    destroyOnClose: true,
-    onConfirm: async () => {
-      let res = await fetchDeleteFile(item);
-      if (res) {
-        MessagePlugin.success("删除成功");
-      } else {
-        MessagePlugin.error("删除失败");
-      }
-      fileList.fetchList();
-      dialog.destroy?.();
-    },
-  });
+const handleDownload = (item: Row) => {
+  downloadFile(item);
 };
 
 const handleClickSpace = (item: { space: string }) => {
   fileList.space = item.space;
 };
+
+const message = useMessage();
+const dialog = useDialog();
+
+const handleDelete = (item: Row) => {
+  dialog.warning({
+    title: `确定删除吗？`,
+    content: `${item.name}`,
+    positiveText: "确定",
+    negativeText: "不确定",
+    onPositiveClick: async () => {
+      let res = await fetchDeleteFile(item);
+      if (res) {
+        message.success("删除成功");
+      } else {
+        message.error("删除失败");
+      }
+      fileList.fetchList();
+    },
+  });
+};
+
+const data = computed<Row[]>(() => fileList.list);
 </script>
 <template>
-  <List
-    :split="true"
-    size="small"
-    class="list"
-    v-if="fileList.list.length"
-  >
-    <ListItem v-for="item in fileList.list" :key="item.name">
-      <p>
-        <Tooltip :content="`空间：${item.space}`">
-          <Tag
-            class="mr-2 cursor-pointer"
-            @click="handleClickSpace(item)"
-          >
-            {{ item.space }}
-          </Tag>
-        </Tooltip>
-        <Tooltip :content="`下载：${item.name}`">
-          <button
-            @click="handleDownload(item)"
-            class="hover:underline"
-          >
-            {{ item.name }}
-          </button>
-        </Tooltip>
-      </p>
-      <template #action>
-        <Tooltip content="删除">
-          <Button
-            variant="text"
-            shape="circle"
-            @click="handleDelete(item)"
-          >
-            <template #icon>
-              <NIcon size="1.2rem">
-                <TrashX />
-              </NIcon>
+  <CollapseTransition :show="data.length">
+    <ul
+      class="list divide-y divide-slate-500 divide-dashed rounded overflow-hidden"
+    >
+      <li
+        class="item flex items-center px-1 py-2 gap-2"
+        v-for="row in data"
+        :key="row.name"
+      >
+        <NTag
+          class="tag flex-shrink-0"
+          type="info"
+          :bordered="false"
+          @click="handleClickSpace(row)"
+        >
+          {{ row.space }}
+        </NTag>
+        <button
+          class="flex-grow text-left truncate"
+          :title="row.name"
+        >
+          {{ row.name }}
+        </button>
+        <div
+          class="flex items-center gap-1 action-group flex-shrink-0"
+        >
+          <NTooltip trigger="hover">
+            <template #trigger>
+              <NButton
+                secondary
+                @click="handleDownload(row)"
+                circle
+                size="small"
+              >
+                <template #icon>
+                  <NIcon>
+                    <CloudDownload />
+                  </NIcon>
+                </template>
+              </NButton>
             </template>
-          </Button>
-        </Tooltip>
-      </template>
-    </ListItem>
-  </List>
+            下载
+          </NTooltip>
+          <NTooltip trigger="hover">
+            <template #trigger>
+              <NButton
+                secondary
+                @click="handleDelete(row)"
+                circle
+                size="small"
+              >
+                <template #icon>
+                  <NIcon>
+                    <TrashX />
+                  </NIcon>
+                </template>
+              </NButton>
+            </template>
+            删除
+          </NTooltip>
+        </div>
+      </li>
+    </ul>
+  </CollapseTransition>
 </template>
 
 <style scoped>
-.list {
-  border-radius: 0.3rem;
+.item {
+  transition: background-color 0.3s;
+  background-color: rgba(255, 255, 255, 0);
 }
-.list li {
-  height: 2.5rem;
+
+.item:hover {
+  background-color: rgba(255, 255, 255, 0.126);
 }
-.list li:last-child::after {
-  display: none;
+
+.tag {
+  cursor: pointer;
+}
+
+.action-group {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.item:hover .action-group {
+  opacity: 1;
 }
 </style>

@@ -5,6 +5,7 @@ import {
   NConfigProvider,
   NLayout,
   NLayoutContent,
+  NDialogProvider,
   NLayoutSider,
   NMessageProvider,
   zhCN,
@@ -27,31 +28,33 @@ const collapsed = ref(true);
     :theme="darkTheme"
   >
     <NMessageProvider>
-      <NLayout has-sider class="layout">
-        <NLayoutSider
-          collapse-mode="width"
-          :collapsed-width="58"
-          :width="240"
-          class="aside"
-          :native-scrollbar="false"
-          :collapsed="collapsed"
-          show-trigger
-          @collapse="collapsed = true"
-          @expand="collapsed = false"
-        >
-          <NavigationBar v-model:collapsed="collapsed" />
-        </NLayoutSider>
-        <NLayoutContent :native-scrollbar="false" class="content">
-          <RouterView v-slot="{ Component, route }">
-            <transition :name="transitionName">
-              <KeepAlive>
-                <component :is="Component" :key="route.path" />
-              </KeepAlive>
-            </transition>
-          </RouterView>
-          <Suspense><Config /></Suspense>
-        </NLayoutContent>
-      </NLayout>
+      <NDialogProvider>
+        <NLayout has-sider class="layout">
+          <NLayoutSider
+            collapse-mode="width"
+            :collapsed-width="58"
+            :width="240"
+            class="aside"
+            :native-scrollbar="false"
+            :collapsed="collapsed"
+            show-trigger
+            @collapse="collapsed = true"
+            @expand="collapsed = false"
+          >
+            <NavigationBar v-model:collapsed="collapsed" />
+          </NLayoutSider>
+          <NLayoutContent :native-scrollbar="false" class="content">
+            <RouterView v-slot="{ Component, route }">
+              <transition :name="transitionName">
+                <KeepAlive>
+                  <component :is="Component" :key="route.path" />
+                </KeepAlive>
+              </transition>
+            </RouterView>
+            <Suspense><Config /></Suspense>
+          </NLayoutContent>
+        </NLayout>
+      </NDialogProvider>
     </NMessageProvider>
   </NConfigProvider>
 </template>

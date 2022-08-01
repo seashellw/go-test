@@ -1,6 +1,5 @@
 import { checkStr, fetchFileList, FileItem } from "@/interface/cos";
 import { defineStore } from "pinia";
-import { MessagePlugin } from "tdesign-vue-next";
 
 export interface UploadItem {
   name: string;
@@ -34,7 +33,6 @@ export const useFileList = defineStore("onlineFileList", {
       if (this.isSpaceError) return;
       let res = await fetchFileList(this.space);
       if (!res) {
-        MessagePlugin.error("获取文件列表失败");
         return;
       }
       this.list = res;

@@ -1,16 +1,18 @@
 <script lang="ts" setup>
 import { getDirPath, openDirDialog } from "@/interface/path";
 import { ArrowBigUpLine } from "@vicons/tabler";
-import { NIcon } from "naive-ui";
 import {
-  Button,
-  Input,
-  MessagePlugin,
-  Tooltip,
-} from "tdesign-vue-next";
+  NButton,
+  NIcon,
+  NInput,
+  NTooltip,
+  useMessage,
+} from "naive-ui";
 import { useFileList } from "./state";
 
 const fileList = useFileList();
+
+const message = useMessage();
 
 const handleOpen = async () => {
   fileList.dir = await openDirDialog();
@@ -19,31 +21,37 @@ const handleOpen = async () => {
 const handleUp = () => {
   let dir = fileList.dir;
   if (!dir) {
-    MessagePlugin.info("未打开目录");
+    message.info("未打开目录");
     return;
   }
   dir = getDirPath(dir);
   if (dir) fileList.dir = dir;
-  else MessagePlugin.info("已到达根目录");
+  else message.info("已到达根目录");
 };
 </script>
 
 <template>
   <div class="flex items-center gap-2">
-    <Input
+    <NInput
       readonly
-      v-model="fileList.dir"
+      v-model:value="fileList.dir"
       @click="handleOpen"
       placeholder="打开本地目录"
+      class="click-input"
     />
-    <Tooltip content="回到上层目录">
-      <Button @click="handleUp" ghost>
-        <template #icon>
-          <NIcon size="1.2rem">
-            <ArrowBigUpLine />
-          </NIcon>
-        </template>
-      </Button>
-    </Tooltip>
+    <NTooltip trigger="hover">
+      <template #trigger>
+        <NButton @click="handleUp" type="info" secondary>
+          <template #icon>
+            <NIcon>
+              <ArrowBigUpLine />
+            </NIcon>
+          </template>
+        </NButton>
+      </template>
+      回到上层目录
+    </NTooltip>
   </div>
 </template>
+
+<style scoped></style>

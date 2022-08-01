@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ControlType } from "@/pages/Text/Control";
 import { useVModel } from "@vueuse/core";
-import { Select } from "tdesign-vue-next";
+import { NSelect } from "naive-ui";
 
 const props = defineProps<{
   modelValue: ControlType;
@@ -21,7 +21,7 @@ const options: { label: string; value: ControlType }[] = [
 <template>
   <div class="flex items-center gap-1">
     <span> 处理模式： </span>
-    <Select class="select" v-model="type" :options="options" />
+    <NSelect class="select" v-model:value="type" :options="options" />
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { watchThrottled } from "@vueuse/core";
-import { Input } from "tdesign-vue-next";
 import { computed } from "vue";
 import { useFileList } from "./state";
+import { NInput } from "naive-ui";
 
 const fileList = useFileList();
 
@@ -15,16 +15,17 @@ watchThrottled(
 );
 
 const inputStatus = computed(() => {
-  if (!fileList.space) return "default";
+  if (!fileList.space) return undefined;
   if (fileList.isSpaceError) return "warning";
   return undefined;
 });
 </script>
 <template>
-  <div class="flex items-center gap-1">
-    <span class="whitespace-nowrap"> 空间代码： </span>
-    <Input v-model="fileList.space" :status="inputStatus" />
-  </div>
+  <NInput
+    placeholder="请输入空间代码"
+    v-model:value="fileList.space"
+    :status="inputStatus"
+  />
 </template>
 
 <style scoped></style>

@@ -8,8 +8,8 @@ import UploadProgress from "./UploadProgress.vue";
   <Page>
     <div class="space-y-2">
       <ControlBar />
-      <FileList />
       <UploadProgress />
+      <FileList />
     </div>
   </Page>
 </template>

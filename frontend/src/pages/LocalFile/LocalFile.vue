@@ -17,9 +17,11 @@ const add = () => {
 <template>
   <Page class="space-y-2">
     <SelectBar />
-    <FileList />
 
     <button @click="add">add</button>
     <Output :list="list" />
+
+    <FileList />
+
   </Page>
 </template>

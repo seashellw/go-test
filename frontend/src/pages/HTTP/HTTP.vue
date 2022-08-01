@@ -48,7 +48,7 @@ const fetch = async () => {
     <BodyInput v-model="req.Data" />
     <div class="flex flex-wrap gap-2">
       <Method v-model="req.Method" />
-      <NButton @click="fetch">
+      <NButton @click="fetch" type="primary">
         发送
         <template #icon>
           <NIcon size="1.1rem" class="mr-1">

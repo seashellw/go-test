@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { fetchUpload } from "@/interface/cos";
 import { CloudUpload } from "@vicons/tabler";
-import { NIcon } from "naive-ui";
 import { useThrottleFn } from "@vueuse/core";
-import { Button, MessagePlugin } from "tdesign-vue-next";
+import { NButton, NIcon, useMessage } from "naive-ui";
 import { reactive } from "vue";
 
 import { UploadItem, useFileList } from "./state";
@@ -11,10 +10,11 @@ import { UploadItem, useFileList } from "./state";
 const fileList = useFileList();
 
 const reFetch = useThrottleFn(() => fileList.fetchList(), 200);
+const message = useMessage();
 
 const handleClickUpload = () => {
   if (fileList.isSpaceError) {
-    MessagePlugin.warning("请输入合法空间代码");
+    message.warning("请输入合法空间代码");
     return;
   }
   let inputEl = document.createElement("input");
@@ -41,14 +41,14 @@ const handleClickUpload = () => {
       }).then((res) => {
         if (res.ok) {
           uploadItem.status = "success";
-          MessagePlugin.success(`${uploadItem.name}上传成功`);
+          message.success(`${uploadItem.name}上传成功`);
           setTimeout(() => {
             fileList.uploadList = fileList.uploadList.filter(
               (item) => item != uploadItem
             );
           }, 2000);
         } else {
-          MessagePlugin.error(`${uploadItem.name}上传失败`);
+          message.error(`${uploadItem.name}上传失败`);
           uploadItem.status = "error";
         }
         reFetch();
@@ -61,11 +61,10 @@ const handleClickUpload = () => {
 };
 </script>
 <template>
-  <Button
+  <NButton
     @click="handleClickUpload"
     :disabled="fileList.isSpaceError"
-    variant="outline"
-    theme="primary"
+    type="primary"
   >
     <span> 上传文件 </span>
     <template #icon>
@@ -73,7 +72,7 @@ const handleClickUpload = () => {
         <CloudUpload />
       </NIcon>
     </template>
-  </Button>
+  </NButton>
 </template>
 
 <style scoped></style>

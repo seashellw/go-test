@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Progress } from "tdesign-vue-next";
 import { computed } from "vue";
 import { useFileList } from "./state";
+import { NProgress } from "naive-ui";
+import CollapseTransition from "@/components/CollapseTransition.vue";
 
 const fileList = useFileList();
 
@@ -19,11 +20,17 @@ const list = computed(() => {
 });
 </script>
 <template>
-  <ul v-if="list.length">
-    <li v-for="item in list">
-      <Progress :percentage="item.percent" :status="item.status" />
-    </li>
-  </ul>
+  <CollapseTransition :show="list.length">
+    <ul>
+      <li v-for="item in list">
+        <NProgress
+          type="line"
+          :percentage="item.percent"
+          :status="item.status"
+        />
+      </li>
+    </ul>
+  </CollapseTransition>
 </template>
 
 <style scoped></style>
