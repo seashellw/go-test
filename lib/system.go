@@ -23,6 +23,11 @@ func SysExecSync(dir string, params ...string) {
 	cmd.Run()
 }
 
+func SysExecAsync(dir string, params ...string) {
+	cmd := getCmd(dir, params...)
+	cmd.Start()
+}
+
 // 在浏览器中打开链接
 func SysBrowserOpen(url string) {
 	SysExecSync("./", "explorer", url)

@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 import CodeHighlight from "@/components/CodeHighlight";
+import Page from "@/components/Page.vue";
 import { useConfig } from "@/config";
 import { format } from "@/interface/prettier";
+import {
+NButton
+} from "naive-ui";
 import { computed } from "vue";
-import Page from "@/components/Page.vue";
+import { SysRebuild } from "wails/go/app/App.js";
 
 const config = useConfig();
 const configText = computed(() => {
@@ -14,8 +18,11 @@ const configText = computed(() => {
 <template>
   <Page>
     <div class="my-3">
-      <span> 配置文件： </span>
+      <p class="text-center text-lg"> 配置文件 </p>
       <CodeHighlight type="json" :text="configText" />
+    </div>
+    <div class="my-3 flex justify-center items-center gap-3">
+      <NButton @click="SysRebuild"> 重构建 </NButton>
     </div>
   </Page>
 </template>

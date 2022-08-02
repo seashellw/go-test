@@ -3,6 +3,8 @@ package app
 import (
 	"context"
 	"go-test/lib"
+	"path/filepath"
+	"strings"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -41,6 +43,25 @@ func (a *App) SysGetCpuPercent() float64 {
 
 func (a *App) SysGetMemPercent() float64 {
 	return lib.SysGetMemPercent()
+}
+
+func (a *App) SysRebuild() {
+	rebuild := func(path string) bool {
+		if strings.HasSuffix(path, "toolkit") {
+			lib.SysExecAsync(path, "start", "PowerShell", `"pnpm run rebuild"`)
+			runtime.Quit(a.Ctx)
+			return true
+		}
+		return false
+	}
+	path := lib.FileGetCurrentPath()
+	if rebuild(path) {
+		return
+	}
+	path = filepath.Dir(path)
+	if rebuild(path) {
+		return
+	}
 }
 
 func (a *App) FileGetAllFileList(path string) []*lib.FileItem {

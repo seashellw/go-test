@@ -53,3 +53,7 @@ export function SysGetCpuPercent() {
 export function SysGetMemPercent() {
   return window['go']['app']['App']['SysGetMemPercent']();
 }
+
+export function SysRebuild() {
+  return window['go']['app']['App']['SysRebuild']();
+}
