@@ -54,7 +54,7 @@ export const Routes: RouteItem[] = [
     },
   },
   {
-    path: "/LocalFile",
+    path: "/localFile",
     component: () => import("@/pages/LocalFile"),
     meta: {
       title: "本地文件",
@@ -63,7 +63,7 @@ export const Routes: RouteItem[] = [
     },
   },
   {
-    path: "/OnlineFile",
+    path: "/onlineFile",
     component: () => import("@/pages/OnlineFile"),
     meta: {
       title: "在线文件",

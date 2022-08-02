@@ -18,12 +18,28 @@ export function FileGetAllFileList(arg1) {
   return window['go']['app']['App']['FileGetAllFileList'](arg1);
 }
 
+export function FileGetCurrentPath() {
+  return window['go']['app']['App']['FileGetCurrentPath']();
+}
+
+export function FileGetDesktopPath() {
+  return window['go']['app']['App']['FileGetDesktopPath']();
+}
+
 export function FileHash(arg1) {
   return window['go']['app']['App']['FileHash'](arg1);
 }
 
 export function FileReadDir(arg1) {
   return window['go']['app']['App']['FileReadDir'](arg1);
+}
+
+export function FileReadFile(arg1) {
+  return window['go']['app']['App']['FileReadFile'](arg1);
+}
+
+export function FileWriteFile(arg1, arg2) {
+  return window['go']['app']['App']['FileWriteFile'](arg1, arg2);
 }
 
 export function HttpFetch(arg1) {

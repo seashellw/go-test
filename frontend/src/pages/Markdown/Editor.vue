@@ -60,7 +60,7 @@ watchThrottled(
 );
 </script>
 <template>
-  <div class="p-2 pr-3 box">
+  <div class="p-2 pr-3 box min-h-screen">
     <VueEditor :editor="editor" />
   </div>
 </template>

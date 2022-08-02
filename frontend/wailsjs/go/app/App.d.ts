@@ -10,9 +10,17 @@ export function DialogDirSelect():Promise<string>;
 
 export function FileGetAllFileList(arg1:string):Promise<Array<lib.FileItem>>;
 
+export function FileGetCurrentPath():Promise<string>;
+
+export function FileGetDesktopPath():Promise<string>;
+
 export function FileHash(arg1:string):Promise<string>;
 
 export function FileReadDir(arg1:string):Promise<Array<lib.FileItem>>;
+
+export function FileReadFile(arg1:string):Promise<string>;
+
+export function FileWriteFile(arg1:string,arg2:string):void;
 
 export function HttpFetch(arg1:lib.HttpRequest):Promise<lib.HttpResponse>;
 

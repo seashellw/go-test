@@ -7,8 +7,10 @@ import (
 	"io/fs"
 	"io/ioutil"
 	"os"
+	"os/user"
 	"path/filepath"
 	"strings"
+	"sync"
 )
 
 type FileItem struct {
@@ -74,4 +76,40 @@ func FileReadDir(path string) []*FileItem {
 		list = append(list, item)
 	}
 	return list
+}
+
+func FileGetCurrentPath() string {
+	path, _ := os.Getwd()
+	return path
+}
+
+func FileGetDesktopPath() string {
+	u, _ := user.Current()
+	return filepath.Join(u.HomeDir, "Desktop")
+}
+
+var fileLock = map[string]*sync.RWMutex{}
+
+func checkLock(path string) *sync.RWMutex {
+	val, ok := fileLock[path]
+	if !ok {
+		val = &sync.RWMutex{}
+		fileLock[path] = val
+	}
+	return val
+}
+
+func FileWriteFile(path string, value string) {
+	lock := checkLock(path)
+	lock.Lock()
+	defer lock.Unlock()
+	ioutil.WriteFile(path, []byte(value), 0644)
+}
+
+func FileReadFile(path string) string {
+	lock := checkLock(path)
+	lock.RLock()
+	defer lock.RUnlock()
+	file, _ := ioutil.ReadFile(configFileName)
+	return string(file)
 }
