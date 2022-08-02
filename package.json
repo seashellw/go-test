@@ -6,8 +6,8 @@
     "update": "wails update -pre"
   },
   "dependencies": {
-    "@types/node": "^18.6.2",
+    "@types/node": "^18.6.3",
     "prettier": "^2.7.1",
-    "zx": "^7.0.7"
+    "zx": "^7.0.8"
   }
 }

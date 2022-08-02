@@ -35,7 +35,6 @@ const collapsed = ref(true);
             :collapsed-width="58"
             :width="240"
             class="aside"
-            :native-scrollbar="false"
             :collapsed="collapsed"
             show-trigger
             @collapse="collapsed = true"
@@ -76,10 +75,13 @@ const collapsed = ref(true);
   height: 100vh;
   position: relative;
   background-color: transparent;
-  border-top-left-radius: 3px;
 }
 
 .aside ::v-deep(.n-layout-toggle-button) {
   background-color: rgba(255, 255, 255, 0.126);
+}
+
+.aside ::v-deep(.n-layout-sider-scroll-container::-webkit-scrollbar) {
+  display: none;
 }
 </style>

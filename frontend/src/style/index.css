@@ -8,6 +8,13 @@ html {
   color-scheme: dark;
 }
 
+body,
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 * {
   scroll-behavior: smooth;
   box-sizing: border-box;

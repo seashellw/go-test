@@ -6,6 +6,7 @@ import {
   Compass,
   DeviceDesktopAnalytics,
   Edit,
+  Bible,
   Folders,
   PlugConnected,
 } from "@vicons/tabler";
@@ -67,6 +68,15 @@ export const Routes: RouteItem[] = [
     meta: {
       title: "在线文件",
       icon: Cloud,
+      show: true,
+    },
+  },
+  {
+    path: "/markdown",
+    component: () => import("@/pages/Markdown"),
+    meta: {
+      icon: Bible,
+      title: "文档编辑器",
       show: true,
     },
   },
