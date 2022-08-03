@@ -5,8 +5,4 @@ await clean();
 
 await cloneBuildAssets();
 
-setTimeout(() => {
-
-}, 1000);
-
 await $`wails dev`;

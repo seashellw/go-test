@@ -1,4 +1,5 @@
 import { reloadApp } from "@/interface/app";
+import { getDesktopPath } from "@/interface/path";
 import { useThrottleFn } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { watch, watchEffect } from "vue";
@@ -11,6 +12,9 @@ export interface Config {
   route?: {
     path: string;
   };
+  path?: {
+    desktopPath: string;
+  };
 }
 
 const init: () => Config = () => ({});
@@ -20,6 +24,7 @@ export const useConfig = defineStore("globalConfig", {
   getters: {
     config: (state) => ({
       route: state.route,
+      path: state.path,
     }),
   },
   actions: {
@@ -34,6 +39,10 @@ export const useConfig = defineStore("globalConfig", {
       } catch {
         config = {};
       }
+      config.path = {
+        ...(config.path || {}),
+        desktopPath: await getDesktopPath(),
+      };
       this.$state = config;
       return config;
     },

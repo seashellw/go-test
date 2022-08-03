@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useConfigInit } from "./useConfig";
+import { useConfigInit } from "./config";
 await useConfigInit();
 </script>
 <template></template>

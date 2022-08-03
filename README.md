@@ -23,7 +23,7 @@ pnpm build
 ## 启动
 
 ```shell
-./build/go.exe
+start ./toolkit.exe
 ```
 
 ## 开发预览

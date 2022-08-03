@@ -79,6 +79,22 @@ export const Routes: RouteItem[] = [
       title: "文档编辑器",
       show: true,
     },
+    children: [
+      {
+        path: "",
+        component: () => import("@/pages/Markdown/Home"),
+        meta: {
+          title: "目录",
+        },
+      },
+      {
+        path: "editor",
+        component: () => import("@/pages/Markdown/Editor"),
+        meta: {
+          title: "编辑",
+        },
+      },
+    ],
   },
   {
     path: "/system",

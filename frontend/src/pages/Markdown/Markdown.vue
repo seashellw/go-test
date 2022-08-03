@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from "vue";
-import {
-  FileGetCurrentPath,
-  FileGetDesktopPath,
-} from "wails/go/app/App";
-const Editor = defineAsyncComponent(() => import("./Editor.vue"));
-(async () => {
-  console.log(await FileGetCurrentPath());
-  console.log(await FileGetDesktopPath());
-})();
+import { KeepAlive } from "vue";
+import { RouterView } from "vue-router";
+import Header from "./Header.vue";
 </script>
 <template>
-  <Editor />
+  <div>
+    <Header />
+    <RouterView v-slot="{ Component, route }">
+      <KeepAlive>
+        <component :is="Component" :key="route.path" />
+      </KeepAlive>
+    </RouterView>
+  </div>
 </template>
 
 <style scoped></style>

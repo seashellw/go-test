@@ -1,5 +1,5 @@
 export { default } from "./Config.vue";
 
-export { useConfig } from "./useConfig";
+export { useConfig } from "./config";
 
-export type { Config } from "./useConfig";
+export type { Config } from "./config";

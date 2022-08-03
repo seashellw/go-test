@@ -1,5 +1,5 @@
 import { existsSync } from "fs";
-import { copyFile, mkdir, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, rm } from "fs/promises";
 
 export const clean = async () => {
   if (existsSync("./build")) await rm("./build", { recursive: true });

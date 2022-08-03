@@ -1,6 +1,7 @@
 import {
   DialogDirSelect,
   FileGetAllFileList,
+  FileGetDesktopPath,
   FileHash,
   FileReadDir,
 } from "wails/go/app/App";
@@ -10,9 +11,13 @@ export const getExtensionName = (path: string) =>
 
 export const getDirPath = (path: string) => {
   let pathList = path.split("\\").filter((item) => item);
-  if (pathList.length <= 1) return undefined;
+  if (pathList.length <= 1) {
+    return undefined;
+  }
   pathList = pathList.slice(0, -1);
-  if (pathList.length <= 1) return pathList.join() + "\\";
+  if (pathList.length <= 1) {
+    return `${pathList.join()}\\`;
+  }
   return pathList.join("\\");
 };
 
@@ -55,6 +60,12 @@ export const readDir: (path: string) => Promise<FileItem[]> = async (
 
 export const openDirDialog = async () => {
   const res = await DialogDirSelect();
-  if (!res) return undefined;
+  if (!res) {
+    return undefined;
+  }
   return res;
+};
+
+export const getDesktopPath = async () => {
+  return FileGetDesktopPath();
 };
