@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { useConfig } from "@/config/config";
+import { DeviceDesktop } from "@vicons/tabler";
 import {
-  NButton,
-  NIcon,
-  NTooltip,
-  NAutoComplete,
   NBreadcrumb,
   NBreadcrumbItem,
+  NButton,
+  NIcon,
 } from "naive-ui";
-import { ArrowBigLeftLine, DeviceDesktop } from "@vicons/tabler";
 import { useEditorState } from "../editor";
 
-import { computed, ref, watchEffect, watch } from "vue";
 import { readDir } from "@/interface/path";
+import { computed, ref, watchEffect } from "vue";
 
 const config = useConfig();
 
@@ -33,13 +31,6 @@ watchEffect(async () => {
   }
   let fileList = readDir(editor.dir);
 });
-
-watch(
-  () => config.config,
-  (val) => {
-    console.log(val);
-  }
-);
 
 const pathItemList = computed(() => {
   let dir = editor.dir;
@@ -64,6 +55,7 @@ const pathItemList = computed(() => {
     </p>
     <NBreadcrumb>
       <NBreadcrumbItem
+        clickable
         v-for="(item, index) in pathItemList"
         :key="index"
       >
@@ -73,4 +65,8 @@ const pathItemList = computed(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+div ::v-deep(.n-breadcrumb-item .n-breadcrumb-item__separator) {
+  margin: 0 2px;
+}
+</style>

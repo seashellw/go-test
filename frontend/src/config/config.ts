@@ -10,14 +10,17 @@ const setConfig = useThrottleFn(ConfigSet, 1000);
 
 export interface Config {
   route?: {
-    path: string;
+    path?: string;
   };
   path?: {
-    desktopPath: string;
+    desktopPath?: string;
   };
 }
 
-const init: () => Config = () => ({});
+const init: () => Config = () => ({
+  route: {},
+  path: {},
+});
 
 export const useConfig = defineStore("globalConfig", {
   state: init,
@@ -43,7 +46,7 @@ export const useConfig = defineStore("globalConfig", {
         ...(config.path || {}),
         desktopPath: await getDesktopPath(),
       };
-      this.$state = config;
+      this.$patch(config);
       return config;
     },
   },
